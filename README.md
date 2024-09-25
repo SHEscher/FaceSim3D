@@ -7,7 +7,7 @@ To test the effect of space and time on face similarity judgements, we conducted
 
 ## More to come
 
-*The paper is currently submitted. The full code base will published here soon.*
+*The paper is currently submitted. The full code base will be published here soon.*
 
 ## Citation
 
