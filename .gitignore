@@ -59,7 +59,6 @@ code/facesim3d/modeling/BFM/
 # SPosE related
 /**/*/SPoSE/log_files/*
 
-
 ## Backups & Archives
 /publications/**/*/Backup*/
 /publications/**/*/Archive*/
@@ -68,6 +67,7 @@ code/facesim3d/modeling/BFM/
 ## User specific configs files
 *_config.toml
 !config.toml  # except for 'config.toml'
+*_credentials.csv
 
 # Jupyter Notebook
 .ipynb_checkpoints
