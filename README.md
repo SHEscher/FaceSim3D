@@ -2,7 +2,7 @@
 
 *Testing the effect of dynamic 3D viewing conditions on face similarity perception*
 
-![Last update](https://img.shields.io/badge/last_update--green)
+![Last update](https://img.shields.io/badge/last_update-Nov_05,_2024-green)
 ![Last update](https://img.shields.io/badge/version-v.0.0.0-blue)
 
 To test the effect of space and time on face similarity judgments,
