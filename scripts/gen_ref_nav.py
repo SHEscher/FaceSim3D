@@ -1,12 +1,29 @@
 """Generate the code reference pages and navigation."""  # noqa: INP001
 
 from pathlib import Path
+import shutil
 
 import mkdocs_gen_files
 
 nav = mkdocs_gen_files.Nav()
 mod_symbol = '<code class="doc-symbol doc-symbol-nav doc-symbol-module"></code>'
 
+# First copy the notebook to the docs/ folder
+notebook_src = Path(__file__).parent.parent / Path("code", "notebooks", "facesim_results.ipynb")
+notebook_dst = Path(__file__).parent.parent / Path("docs", "notebooks", "facesim_results.ipynb")
+notebook_dst.parent.mkdir(parents=True, exist_ok=True)
+
+# Remove the "old" notebook in docs/ first
+if notebook_dst.exists():
+    notebook_dst.unlink()
+
+# Copy the notebook to the docs/ folder
+if notebook_src.exists():
+    shutil.copy(notebook_src, notebook_dst)
+else:
+    print(f"Notebook not found: '{notebook_src}'")
+
+# Create the reference pages
 for path in sorted(Path("code").rglob("*.py")):
     if "tests" in path.parts or "SPoSE" in path.parts or "VICE" in path.parts:
         continue
