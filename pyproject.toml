@@ -105,7 +105,7 @@ docs = [
 
 [project.urls]
 homepage = "https://neurohum.cbs.mpg.de"
-documentation = "https://shescher.github.io/facesim3d/"
+documentation = "https://shescher.github.io/FaceSim3D/"
 repository = "https://github.com/SHEscher/FaceSim3D"
 OSF = "https://osf.io/4a2jf/"
 preregistration = "https://osf.io/678uh"
