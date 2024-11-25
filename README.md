@@ -3,7 +3,8 @@
 *Testing the effect of dynamic 3D viewing conditions on face similarity perception*
 
 ![Last update](https://img.shields.io/badge/last_update-Nov_25,_2024-green)
-![Last update](https://img.shields.io/badge/version-v.1.0.0-blue)
+![version](https://img.shields.io/badge/version-v.1.0.0-blue)
+[![demo](https://img.shields.io/badge/pretty-docs-violet)](https://shescher.github.io/facesim3d/)
 
 ## Project description
 
