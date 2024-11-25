@@ -16,7 +16,12 @@ jobs:
           python-version: 3.x
       - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
       - name: Install Pandoc
-        run: sudo apt-get install -y pandoc
+        # run: sudo apt-get install -y pandoc
+        run: |
+            sudo apt-get update
+            sudo apt-get install -y wget
+            wget https://github.com/jgm/pandoc/releases/download/2.11.4/pandoc-2.11.4-1-amd64.deb
+            sudo dpkg -i pandoc-2.11.4-1-amd64.deb
       - name: Install Pandoc Citeproc
         run: sudo apt-get install -y pandoc-citeproc
       - uses: actions/cache@v3
