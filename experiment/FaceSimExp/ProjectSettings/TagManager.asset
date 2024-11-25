@@ -1,0 +1,175 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Planes
+  - Camera1
+  - Camera2
+  - Camera3
+  - Button
+  - StimIndicator
+  - Feed
+  - Head1
+  - Head2
+  - Head3
+  - Head4
+  - RotatorSphere1
+  - RotatorSphere2
+  - RotatorSphere3
+  - Sphere1
+  - Sphere2
+  - Sphere3
+  - Head5
+  - Head6
+  - Head7
+  - Head8
+  - Head9
+  - Head10
+  - Plane1
+  - Plane2
+  - Plane3
+  - ReferenceCross
+  - Head11
+  - Head12
+  - Head13
+  - Head14
+  - Head15
+  - Head16
+  - Head17
+  - Head18
+  - Head19
+  - Head20
+  - Head21
+  - Head22
+  - Head24
+  - Head23
+  - Head25
+  - Head26
+  - Head27
+  - Head28
+  - Head29
+  - Head30
+  - Head31
+  - Head32
+  - Head33
+  - Head34
+  - Head35
+  - Head36
+  - Head37
+  - Head38
+  - Head39
+  - Head40
+  - Head41
+  - Head42
+  - Head43
+  - Head44
+  - Head45
+  - Head46
+  - Head47
+  - Head48
+  - Head49
+  - Head50
+  - Head51
+  - Head52
+  - Head53
+  - Head54
+  - Head55
+  - Head56
+  - Head57
+  - Head58
+  - Head59
+  - Head60
+  - Head61
+  - Head62
+  - Head63
+  - Head64
+  - Head65
+  - Head66
+  - Head67
+  - Head68
+  - Head69
+  - Head70
+  - Head71
+  - Head72
+  - Head73
+  - Head74
+  - Head75
+  - Head76
+  - Head77
+  - Head78
+  - Head79
+  - Head80
+  - Head81
+  - Head82
+  - Head83
+  - Head84
+  - Head85
+  - Head86
+  - Head87
+  - Head88
+  - Head89
+  - Head90
+  - Head91
+  - Head92
+  - Head93
+  - Head94
+  - Head95
+  - Head96
+  - Head97
+  - Head98
+  - Head99
+  - Head100
+  - EndTraining
+  - EndTestBlock
+  - HeadT1
+  - HeadT2
+  - HeadT3
+  - HeadT4
+  - HeadT6
+  - HeadT5
+  - HeadT7
+  - HeadT8
+  - HeadT9
+  - HeadT10
+  - Heads3D
+  - MainCanvas
+  - WebDB
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

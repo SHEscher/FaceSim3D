@@ -1,0 +1,137 @@
+﻿<div class="modal fade" id="modalCredenciado">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" name="frmModalCredenciado" id="frmModalCredenciado" ng-submit="submitModalCredenciado()">
+                <div class="modal-header">
+                    <h4 class="modal-title" ng-show="!frmModalCredenciado.Id">Novo Credenciado</h4>
+                    <h4 class="modal-title" ng-show="frmModalCredenciado.Id">Credenciado: {{frmModalCredenciado.Cnome}}</h4>
+                </div>
+                <div class="modal-body">
+                    <tabset justified="true">
+                        <!--Tab CREDENCIADO-->
+                        <tab heading="Credenciado">
+                            <p>
+                                <fieldset>
+                                    <!--ID-->
+                                    <div class="form-group" ng-show="frmModalCredenciado.Id">
+                                        <label for="frmModalCredenciado.Id" class="col-lg-2 control-label">ID</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control" id="frmModalCredenciado.Id" ng-model="frmModalCredenciado.Id" placeholder="ID" required readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <!--NOME-->
+                                    <div class="form-group">
+                                        <label for="frmModalCredenciado.Cnome" class="col-lg-2 control-label">Nome</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control" id="frmModalCredenciado.Cnome" ng-model="frmModalCredenciado.Cnome" placeholder="Nome" required>
+                                        </div>
+                                    </div>
+                                    <!--CNPJ/CPF-->
+                                    <div class="form-group">
+                                        <label for="frmModalCredenciado.Ccnpj_cpf" class="col-lg-2 control-label">CNPJ/CPF</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control" id="frmModalCredenciado.Ccnpj_cpf" ng-model="frmModalCredenciado.Ccnpj_cpf" placeholder="CNPJ / CPF" ui-br-cpfcnpj-mask required>
+                                        </div>
+                                    </div>
+                                    <!--EMPRESA-->
+                                    <!--<div class="form-group">
+                                        <label for="frmModalCredenciado.Cempresa" class="col-lg-2 control-label">Empresa</label>
+                                        <div class="col-lg-10">
+                                            <select class="form-control" id="frmModalCredenciado.Id_empresa" ng-model="frmModalCredenciado.Id_empresa" required>
+                                                <option ng-repeat="empresa in lstEmpresa | filter:({Cativo:'Ativo'}):true" value="{{empresa.Id}}">{{empresa.Cnome}}</option>
+                                                <option value="0" ng-click="visualizarNovoEmpresa()">Nova Empresa</option>
+                                            </select>
+                                        </div>
+                                    </div>-->
+                                    <!--TEL CEL-->
+                                    <div class="form-group">
+                                        <label for="frmModalCredenciado.Cfonecel" class="col-lg-2 control-label">Telefone Celular</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control" id="frmModalCredenciado.Cfonecel" ng-model="frmModalCredenciado.Cfonecel" ui-br-phone-number required>
+                                        </div>
+                                    </div>
+                                    <!--TEL RES-->
+                                    <div class="form-group">
+                                        <label for="frmModalCredenciado.Cfone" class="col-lg-2 control-label">Telefone Residencial</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control" id="frmModalCredenciado.Cfone" ng-model="frmModalCredenciado.Cfone" ui-br-phone-number>
+                                        </div>
+                                    </div>
+                                    <!--TEL COM-->
+                                    <div class="form-group">
+                                        <label for="frmModalCredenciado.Cfonecom" class="col-lg-2 control-label">Telefone Comercial</label>
+                                        <div class="col-lg-10">
+                                            <input type="text" class="form-control" id="frmModalCredenciado.Cfonecom" ng-model="frmModalCredenciado.Cfonecom" ui-br-phone-number>
+                                        </div>
+                                    </div>
+                                    <!--EMAIL-->
+                                    <div class="form-group">
+                                        <label for="frmModalCredenciado.Cemail" class="col-lg-2 control-label">Email</label>
+                                        <div class="col-lg-10">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">@</div>
+                                                <input type="email" class="form-control" id="frmModalCredenciado.Cemail" ng-model="frmModalCredenciado.Cemail" placeholder="email@dominio.com.br" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--STATUS-->
+                                    <div class="form-group">
+                                        <label for="frmModalCredenciado.Cativo" class="col-lg-2 control-label">Status</label>
+                                        <div class="col-lg-10">
+                                            <select class="form-control" id="frmModalCredenciado.Cativo" ng-model="frmModalCredenciado.Cativo" required>
+                                                <option value="Ativo">Ativo</option>
+                                                <option value="Inativo">Inativo</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </p>
+                        </tab>
+                        <!--Tab VEICULO-->
+                        <tab heading="Veiculo">
+                            <p>
+                                <fieldset>
+                                    <!--PLACA + BUSCAR-->
+                                    <div class="form-group">
+                                        <label for="frmModalCredenciado.Cplaca" class="col-lg-3 control-label">Placa</label>
+                                        <div class="col-lg-9">
+                                            <div class="input-group">
+                                                <input class="form-control col-lg-3" id="frmModalCredenciado.Cplaca" ng-model="frmModalCredenciado.Cplaca" ui-mask="AAA-9999" required>
+                                                <div class="input-group-btn">
+                                                    <button type="button" class="btn btn-primary" ng-click="validarPlacaTAGmodal(frmModalCredenciado.Cplaca)">Buscar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--TAG-->
+                                    <div class="form-group">
+                                        <label for="frmModalCredenciado.Ctag" class="col-lg-3 control-label">Tag de Cobrança</label>
+                                        <div class="col-lg-9">
+                                            <input type="text" class="form-control" id="frmModalCredenciado.Ctag" ng-model="frmModalCredenciado.Ctag" placeholder="Tag" required readonly="readonly">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </p>
+                        </tab>
+                    </tabset>
+                </div>
+                <div class="modal-footer">
+                    <!--Botão Gravar-->
+                    <div class="btn-group ">
+                        <button type="submit" class="btn btn-danger col" ng-click="Submit">
+                            <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;
+                            Gravar
+                        </button>
+                    </div>
+                    <!--Botão Cancelar-->
+                    <div class="btn-group ">
+                        <button type="submit" class="btn btn-default col" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

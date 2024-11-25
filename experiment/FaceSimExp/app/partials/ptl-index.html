@@ -1,0 +1,149 @@
+﻿<div ng-controller="IndexCtrl">
+    <dir-modalloading></dir-modalloading>
+    <!-- MODAL DIALOG DEFAULT -->
+    <div class="modal fade" id="modalDinamico">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-info-sign text-primary"></span>&nbsp;&nbsp;Mensagem</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{modalmessage}}</p>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group ">
+                        <a href="#" class="btn btn-default col" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;
+                            Fechar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MENU -->
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container" ng-if="userLogin==true">
+            <div class="navbar-header">
+                <a href="index.html" class="navbar-brand">SCC</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <!-- NÍVEL ROOT -->
+                <div ng-if="contemPrivilegio('root')">
+                    <ul class="nav navbar-nav">
+                        <!--Item Usuarios-->
+                        <li>
+                            <a href="" ng-click="setPage('Usuários')">Usuários</a>
+                        </li>
+                        <!--Item Privilegios-->
+                        <li>
+                            <a href="" ng-click="setPage('Privilégios')">Privilégios</a>
+                        </li>
+                        <!--Item Conveniado-->
+                        <li>
+                            <a href="" ng-click="setPage('Conveniados')">Conveniados</a>
+                        </li>
+                        <!--Item Credenciado-->
+                        <li>
+                            <a href="" ng-click="setPage('Credenciados')">Credenciados</a>
+                        </li>
+                        <!--Item Categoria-->
+                        <li>
+                            <a href="" ng-click="setPage('Categorias')">Categorias</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- NÍVEL ADMINISTRADOR -->
+                <div ng-if="contemPrivilegio('admin')">
+                    <ul class="nav navbar-nav">
+                        <!--Item Empresa-->
+                        <li>
+                            <a href="" ng-click="setPage('Empresas')">Empresas</a>
+                        </li>
+                        <!--Item Contrato-->
+                        <li>
+                            <a href="" ng-click="setPage('Contratos')">Contratos</a>
+                        </li>
+                    </ul>
+                    <!--Item Comandos-->
+                    <dir-comandos></dir-comandos>
+                </div>
+
+                <!-- NÍVEL OPERADOR -->
+                <!--<div ng-if="contemPrivilegio('user')">
+                    <ul class="nav navbar-nav">
+
+                        <li>
+                            <a href="" ng-click="setPage('XXXX')">Teste</a>
+                        </li>
+                    </ul>
+                </div>-->
+                <!--Item Padrão/Logoff-->
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Sistema<span class="caret"></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="themes" ng-controller="LoginCtrl">
+                            <li><a href="" ng-click="logout()">Logoff</a></li>
+                            <li><a href="">Versão: {{ versao.msg }} </a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- USUARIO LOGADO E VERSAO -->
+
+                <ul class="nav navbar-nav navbar-right">
+                    <!--LOGIN -->
+                    <li>
+                        <a href="#">{{ usuario }}</a>
+                    </li>
+                    <!--VERSAO-->
+                    <!--<li>
+                        <a href="#"> {{ versao.msg }}</a>
+                    </li>-->
+                </ul>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- CONTEUDO -->
+    <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li class="active">{{pagina}}</li>
+        </ul>
+        <!-- PAGINA LOGIN -->
+        <dir-login></dir-login>
+        <!-- NÍVEL ROOT -->
+        <div ng-if="contemPrivilegio('root')">
+            <!-- PAGINA USUARIOS -->
+            <dir-usuarios></dir-usuarios>
+            <!-- PAGINA PRIVILEGIOS -->
+            <dir-privilegio></dir-privilegio>
+            <!-- PAGINA CONVENIADO -->
+            <dir-conveniado></dir-conveniado>
+            <!-- PAGINA CREDENCIADO -->
+            <dir-credenciado></dir-credenciado>
+            <!-- PAGINA CATEGORIA -->
+            <dir-categoria></dir-categoria>
+        </div>
+        <!-- NÍVEL ADMINISTRADOR -->
+        <div ng-if="contemPrivilegio('admin')">
+            <!-- PAGINA EMPRESA -->
+            <dir-empresa></dir-empresa>
+            <!-- PAGINA CONTRATO -->
+            <dir-contrato></dir-contrato>
+        </div>
+        <!-- NÍVEL OPERADOR -->
+        <div ng-if="contemPrivilegio('user')">
+            <!-- PAGINA RELATORIO UTILIZACAO -->
+            <dir-relutilizacao></dir-relutilizacao>
+        </div>
+    </div>
+</div>

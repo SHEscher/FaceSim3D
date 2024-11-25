@@ -1,0 +1,213 @@
+﻿<div class="modal fade" id="modalCategoria">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <form class="form-horizontal" name="frmModalCategoria" id="frmModalCategoria" ng-submit="verificaacao()">
+                <div class="modal-header">
+
+                    <h4 class="modal-title" ng-show="!frmModalCategoria.Id">Nova Categoria </h4>
+                    <h4 class="modal-title" ng-show="frmModalCategoria.Id">Categoria: {{frmModalCategoria.Cnome}}</h4>
+                </div>
+                <div class="modal-body">
+                    <!--TABS-->
+                    <tabset justified="true">
+                        <!--TAB CATEGORIA-->
+                        <tab heading='Categoria'>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <fieldset>
+                                        <div class="form-group" ng-show="frmModalCategoria.Id">
+                                            <label for="frmModalCategoria.Id" class="col-lg-2 control-label">ID</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" id="frmModalCategoria.Id" ng-model="frmModalCategoria.Id" placeholder="ID" required readonly="readonly">
+                                            </div>
+                                        </div>                                            
+              
+                                        <!-- Id_Categoria -->
+                                        <div class="form-group">
+                                            <label for="frmModalCategoria.Id_categoria" class="col-lg-2 control-label">Categoria</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" id="frmModalCategoria.Id_categoria" ng-model="frmModalCategoria.Id_categoria" placeholder="Código Local da Categoria" required numbers-only>
+                                            </div>
+                                        </div>
+
+                                        <!-- Conveniado-->
+                                        <div class="form-group">
+                                            <label for="frmModalCategoria.Id_conveniado" class="col-lg-2 control-label">Conveniado</label>
+                                            <div class="col-lg-10">
+                                                <select id="frmModalCategoria.Id_conveniado" class="form-control " ng-model="frmModalCategoria.Id_conveniado">
+                                                    <option ng-repeat="conveniado in lstConveniado | filter:({Cativo:'Ativo'}):true" value="{{conveniado.Id}}">
+                                                        {{conveniado.Cnome}}
+                                                    </option>
+                                                    <!--<option value="novo">Novo Conveniado</option>-->
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!--- Cnome -->
+                                        <div class="form-group">
+                                            <label for="frmModalCategoria.Cnome" class="col-lg-2 control-label">Nome</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" id="frmModalCategoria.Cnome" ng-model="frmModalCategoria.Cnome" placeholder="Nome da Categoria" required>
+                                            </div>
+                                        </div>
+
+                                        <!-- Valor -->
+                                        <div class="form-group">
+                                            <label for="frmModalCategoria.Ivalor" class="col-lg-2 control-label">Valor</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" id="frmModalCategoria.Ivalor" ng-model="frmModalCategoria.Ivalor" required ui-money-mask ui-hide-group-sep>
+                                            </div>
+                                        </div>
+
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </tab>
+
+                        <!--TAB HORARIOS-->
+                        <tab heading='Horarios'>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <fieldset>
+                                        <div class="form-group" ng-show="frmModalCategoria.Id">
+                                            <label for="frmModalCategoria.Id" class="col-lg-2 control-label">ID</label>
+                                            <div class="col-lg-10">
+                                                <input type="text" class="form-control" id="frmModalCategoria.Id" ng-model="frmModalCategoria.Id" placeholder="ID" required readonly="readonly">
+                                            </div>
+                                        </div>
+
+                                        <!-- Segunda -->
+                                        <div class="form-group">
+                                            <label for="frmModalCategoria.Csegini" class="col-lg-2 control-label">Segunda</label>
+                                            <div class="col-lg-10">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">De</div>
+                                                    <input type="text" class="form-control" id="frmModalCategoria.Csegini" ng-model="frmModalCategoria.Csegini" ui-time-mask required>
+                                                    
+                                                    <div class="input-group-addon">Até</div>
+                                                    <input type="text" class="form-control" id="frmModalCategoria.Csegfim" ng-model="frmModalCategoria.Csegfim" ui-time-mask required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Terça -->
+                                        <div class="form-group">
+                                            <label for="frmModalCategoria.Cterini" class="col-lg-2 control-label">Terça</label>
+                                            <div class="col-lg-10">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">De</div>
+                                                    <input type="text" class="form-control" id="frmModalCategoria.Cterini" ng-model="frmModalCategoria.Cterini" ui-time-mask required>
+
+                                                    <div class="input-group-addon">Até</div>
+                                                    <input type="text" class="form-control" id="frmModalCategoria.Cterfim" ng-model="frmModalCategoria.Cterfim" ui-time-mask required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Quarta -->
+                                        <div class="form-group">
+                                            <label for="frmModalCategoria.Cquaini" class="col-lg-2 control-label">Quarta</label>
+                                            <div class="col-lg-10">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">De</div>
+                                                    <input type="text" class="form-control" id="frmModalCategoria.Cquaini" ng-model="frmModalCategoria.Cquaini" ui-time-mask required>
+
+                                                    <div class="input-group-addon">Até</div>
+                                                    <input type="text" class="form-control" id="frmModalCategoria.Cquafim" ng-model="frmModalCategoria.Cquafim" ui-time-mask required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Quinta -->
+                                        <div class="form-group" ng-init="frmModalCategoria.Cquifim=1200">
+                                            <label for="frmModalCategoria.Cquiini" class="col-lg-2 control-label">Quinta</label>
+                                            <div class="col-lg-10">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">De</div>
+                                                    <input type="text" class="form-control" id="frmModalCategoria.Cquiini" ng-model="frmModalCategoria.Cquiini" ui-time-mask required>
+
+                                                    <div class="input-group-addon">Até</div>
+                                                    <input type="text" class="form-control" id="frmModalCategoria.Cquifim" ng-model="frmModalCategoria.Cquifim" ui-time-mask required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Sexta -->
+                                        <div class="form-group">
+                                            <label for="frmModalCategoria.Csexini" class="col-lg-2 control-label">Sexta</label>
+                                            <div class="col-lg-10">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">De</div>
+                                                    <input type="text" class="form-control" id="frmModalCategoria.Csexini" ng-model="frmModalCategoria.Csexini" ui-time-mask required>
+
+                                                    <div class="input-group-addon">Até</div>
+                                                    <input type="text" class="form-control" id="frmModalCategoria.Csexfim" ng-model="frmModalCategoria.Csexfim" ui-time-mask required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Sabado -->
+                                        <div class="form-group">
+                                            <label for="frmModalCategoria.Csabini" class="col-lg-2 control-label">Sábado</label>
+                                            <div class="col-lg-10">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">De</div>
+                                                    <input type="text" class="form-control" id="frmModalCategoria.Csabini" ng-model="frmModalCategoria.Csabini" ui-time-mask required>
+
+                                                    <div class="input-group-addon">Até</div>
+                                                    <input type="text" class="form-control" id="frmModalCategoria.Csabfim" ng-model="frmModalCategoria.Csabfim" ui-time-mask required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                        <!-- Domingo -->
+                                        <div class="form-group">
+                                            <label for="frmModalCategoria.Cdomini" class="col-lg-2 control-label">Domingo</label>
+                                            <div class="col-lg-10">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">De</div>
+                                                    <input type="text" class="form-control" id="frmModalCategoria.Cdomini" ng-model="frmModalCategoria.Cdomini" ui-time-mask required>
+
+                                                    <div class="input-group-addon">Até</div>
+                                                    <input type="text" class="form-control" id="frmModalCategoria.Cdomfim" ng-model="frmModalCategoria.Cdomfim" ui-time-mask required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Feriado -->
+                                        <div class="form-group">
+                                            <label for="frmModalCategoria.Cferini" class="col-lg-2 control-label">Feriado</label>
+                                            <div class="col-lg-10">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">De</div>
+                                                    <input type="text" class="form-control" id="frmModalCategoria.Cferini" ng-model="frmModalCategoria.Cferini" ui-time-mask required>
+
+                                                    <div class="input-group-addon">Até</div>
+                                                    <input type="text" class="form-control" id="frmModalCategoria.Cferfim" ng-model="frmModalCategoria.Cferfim" ui-time-mask required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </tab>
+                    </tabset>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group ">
+                        <button type="submit" class="btn btn-danger col" ng-click="Submit">
+                            <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;
+                            Gravar
+                        </button>
+                    </div>
+                    <div class="btn-group ">
+                        <button type="submit" class="btn btn-default col" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

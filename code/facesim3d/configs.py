@@ -75,7 +75,6 @@ class CONFIG:
         Display the nested configuration information.
 
         :param indent: The number of tabs to use for indentation (default: 0)
-        :type indent: int
         :return: None
         """
         for key, val in self.__dict__.items():

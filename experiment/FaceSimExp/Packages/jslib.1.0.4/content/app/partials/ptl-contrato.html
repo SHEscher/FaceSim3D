@@ -1,0 +1,129 @@
+﻿<div id="div_contrato" ng-if="pagina=='Contratos'" ng-controller="ContratoCtrl">
+    <!-- MODAL CONFIRMA DELETE -->
+    <dir-confirmdelete></dir-confirmdelete>
+
+    <!-- MODAL DE VALIDAÇÂO DE CREDENCIADO -->
+    <dir-confirmcredenciado></dir-confirmcredenciado>
+
+    <!-- MODAL CREDENCIADO -->
+    <dir-modalcredenciado></dir-modalcredenciado>
+
+    <!-- MODAL EMPRESA -->
+    <dir-modalempresa ng-controller="EmpresaCtrl"></dir-modalempresa>
+
+    <!-- MODAL CONTRATO -->
+    <dir-modalcontrato class="modalcontrato"></dir-modalcontrato>
+
+    <!-- CONTEUDO -->
+    <span class="animate-if">
+        <div>
+            <accordion>
+                <!-- Filtro -->
+                <accordion-group heading="FILTRO" is-open="accordion.isFilterOpen">
+                    <form class="form-horizontal" name="frmFiltro" ng-submit="submitFormFiltro()">
+                        <fieldset>
+                            <!--Nome-->
+                            <div class="form-group">
+                                <label for="frmFiltroValues.tb_credenciado.Cnome" class="col-lg-1 control-label">Nome</label>
+                                <div class="col-lg-11">
+                                    <input type="text" class="form-control" id="frmFiltroValues.tb_credenciado.Cnome" ng-model="frmFiltroValues.tb_credenciado.Cnome" placeholder="Nome do credenciado">
+                                </div>
+                            </div>
+                            <!--Placa-->
+                            <div class="form-group">
+                                <label for="frmFiltroValues.Cnro_contrato" class="col-lg-1 control-label">Contrato</label>
+                                <div class="col-lg-11">
+                                    <input type="text" class="form-control" id="frmFiltroValues.Cnro_contrato" ng-model="frmFiltroValues.Cnro_contrato" placeholder="Contrato">
+                                </div>
+                            </div>
+                            <!--Status-->
+                            <div class="form-group">
+                                <label for="frmFiltroValues.Cativo" class="col-lg-1 control-label">Status</label>
+                                <div class="col-lg-11">
+                                    <select class="form-control" id="frmFiltroValues.Cativo" ng-model="frmFiltroValues.Cativo">
+                                        <option value="">Todos</option>
+                                        <option value="Ativo">Ativo</option>
+                                        <option value="Inativo">Inativo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--Botões-->
+                            <div class="col-sm-9 col-sm-offset-4">
+                                <!--Filtrar-->
+                                <button type="submit" class="btn btn-success col-sm-2" ng-click="Submit">Filtrar</button>
+                                <!--Limpar-->
+                                <button type="button" class="btn btn-primary col-sm-2 col-sm-offset-1" ng-click="limpaFormFiltro()">Limpar</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </accordion-group>
+                <!-- Resultado -->
+                <accordion-group heading="RESULTADOS" is-open="accordion.isFirstOpen">
+                    <!--Botão ADICIONAR-->
+                    <div class="btn-group ">
+                        <a href="#" class="btn btn-success col" ng-click="visualizarNovo()">
+                            <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;
+                            Adicionar
+                        </a>
+                    </div>
+                    <!--Itens PAGINAÇÃO -->
+                    <div class="btn-group pull-right">
+                        <a href="#" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Registros Por Página&nbsp;&nbsp;<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="" ng-click="setRegistrosPorPagina('25')">25</a></li>
+                            <li><a href="" ng-click="setRegistrosPorPagina('50')">50</a></li>
+                            <li><a href="" ng-click="setRegistrosPorPagina('75')">75</a></li>
+                            <li><a href="" ng-click="setRegistrosPorPagina('100')">100</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#" ng-click="setRegistrosPorPagina('100000')">Todos</a></li>
+                        </ul>
+                    </div>
+                    <br /><br />
+
+                    
+
+                    <!-- GRID CONTRATOS -->
+                    <table tr-ng-grid="" items="lstContrato" order-by="'Cnro_contrato'" page-items="porPagina" locale="ptbr">
+                        <thead>
+                            <tr display-align="left">
+                                <th field-name="Cnro_contrato" display-name="Contrato" enable-filtering="true" enable-sorting="true"></th>
+                                <th field-name="tb_credenciado.Cnome" display-name="Nome" enable-filtering="true" enable-sorting="true"></th>
+                                <th field-name="computedTsvigencia_inicio" display-name="Vigencia Início" enable-filtering="true" enable-sorting="true" display-format="formataVigenciaIni:gridItem"></th>
+                                <th field-name="computedTsvigencia_fim" display-name="Vigencia Fim" enable-filtering="true" enable-sorting="true" display-format="formataVigenciaFim:gridItem"></th>
+                                <th field-name="Cativo" display-name="Status" enable-filtering="true" enable-sorting="true"></th>
+                                <th display-name="Ações" display-format="uppercase" enable-filtering="false" enable-sorting="false" display-align="center" cell-width="20em"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr display-align="center">
+                                <td>
+                                    <!--Botão VISUALIZAR-->
+                                    <div class="btn-group ">
+                                        <a href="#" class="btn btn-info col" ng-click="visualizar(gridItem)">
+                                            <span class="glyphicon glyphicon-zoom-in"></span>&nbsp;&nbsp;
+                                            Visualizar
+                                        </a>
+                                    </div>
+                                    <!--Botão DELETAR-->>
+                                    <div class="btn-group col-lg-offset-1">
+                                        <a href="#" class="btn btn-danger col" ng-click="visualizarConfirmarDelete(gridItem.Id)">
+                                            <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;
+                                            Excluir
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!--Botão ADICIONAR-->
+                    <div class="btn-group ">
+                        <a href="#" class="btn btn-success col" ng-click="visualizarNovo()">
+                            <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;
+                            Adicionar
+                        </a>
+                    </div>
+                </accordion-group>
+            </accordion>
+        </div>
+    </span>
+</div>

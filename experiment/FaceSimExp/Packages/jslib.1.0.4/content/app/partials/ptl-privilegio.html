@@ -1,0 +1,99 @@
+﻿<div id="div_privilegio" ng-if="pagina=='Privilégios'" ng-controller="PrivilegioCtrl">
+    <!-- MODAL CONFIRMA DELETE -->
+    <dir-confirmdelete></dir-confirmdelete>
+
+    <!-- MODAL VIEW -->
+    <dir-modalprivilegio></dir-modalprivilegio>
+
+    <!-- CONTEUDO -->
+    <span class="animate-if">
+        <div>
+            <accordion>
+                <!-- Filtro -->
+                <accordion-group heading="FILTRO" is-open="accordion.isFilterOpen">
+                    <form class="form-horizontal" name="frmFiltro" ng-submit="submitFormFiltro()">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="frmFiltroValues.Cnome" class="col-lg-1 control-label">Nome</label>
+                                <div class="col-lg-11">
+                                    <input type="text" class="form-control" id="frmFiltroValues.Cnome" ng-model="frmFiltroValues.Cnome" placeholder="Nome do Privilegio">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="frmFiltroValues.Cativo" class="col-lg-1 control-label">Status</label>
+                                <div class="col-lg-11">
+                                    <select class="form-control" id="frmFiltroValues.Cativo" ng-model="frmFiltroValues.Cativo">
+                                        <option value="">Todos</option>
+                                        <option value="A">Ativo</option>
+                                        <option value="I">Inativo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-9 col-sm-offset-4">
+                                <button type="submit" class="btn btn-success col-sm-2" ng-click="Submit">Filtrar</button>
+                                <button type="button" class="btn btn-primary col-sm-2 col-sm-offset-1" ng-click="limpaFormFiltro()">Limpar</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </accordion-group>
+                <!-- Resultado -->
+                <accordion-group heading="RESULTADOS" is-open="accordion.isFirstOpen">
+                    <div class="btn-group ">
+                        <a href="#" class="btn btn-success col" ng-click="visualizarNovo()">
+                            <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;
+                            Adicionar
+                        </a>
+                    </div>
+                    <!--RESULTADOS -->
+                    <div class="btn-group pull-right">
+                        <a href="#" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Registros Por Página&nbsp;&nbsp;<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="" ng-click="setRegistrosPorPagina('25')">25</a></li>
+                            <li><a href="" ng-click="setRegistrosPorPagina('50')">50</a></li>
+                            <li><a href="" ng-click="setRegistrosPorPagina('75')">75</a></li>
+                            <li><a href="" ng-click="setRegistrosPorPagina('100')">100</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#" ng-click="setRegistrosPorPagina('100000')">Todos</a></li>
+                        </ul>
+                    </div>
+                    <br /><br />
+                    <table tr-ng-grid="" items="lstPrivilegio" page-items="porPagina" locale="ptbr">
+                        <thead>
+                            <tr display-align="left">
+                                <th field-name="Cnome" display-name="Permissao" enable-filtering="true" enable-sorting="true"></th>
+                                <th field-name="Cativo" display-name="Status" enable-filtering="true" enable-sorting="true"></th>
+                                <th field-name="Ctipo" display-name="Tipo" enable-filtering="true" enable-sorting="true"></th>
+                                <th display-name="Ações" display-format="uppercase" enable-filtering="false" enable-sorting="false" display-align="center"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="btn-group ">
+                                        <a href="#" class="btn btn-info col" ng-click="visualizar(gridItem)">
+                                            <span class="glyphicon glyphicon-zoom-in"></span>&nbsp;&nbsp;
+                                            Visualizar
+                                        </a>
+                                    </div>
+                                    <div class="btn-group col-lg-offset-1">
+                                        <a href="#" class="btn btn-danger col" ng-click="visualizarConfirmarDelete(gridItem.Id)">
+                                            <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;
+                                            Excluir
+                                        </a>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="btn-group ">
+                        <a href="#" class="btn btn-success col" ng-click="visualizarNovo()">
+                            <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;
+                            Adicionar
+                        </a>
+                    </div>
+                </accordion-group>
+            </accordion>
+        </div>
+    </span>
+</div>

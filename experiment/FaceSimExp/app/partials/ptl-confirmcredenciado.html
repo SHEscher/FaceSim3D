@@ -1,0 +1,57 @@
+﻿<div class="modal fade" id="modalConfirmCredenciado">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" name="modalConfirmCredenciado" id="modalConfirmCredenciado" ng-submit="submitConfirmCredenciado()">
+                <div class="modal-header">
+                    <h4 class="modal-title">Validação - Credenciado</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                        <!--PLACA + BUSCAR-->
+                        <div class="form-group">
+                            <label for="modalConfirmCredenciado.Cplaca" class="col-lg-4 control-label">Placa</label>
+                            <div class="col-lg-8">
+                                <div class="input-group">
+                                    <input class="form-control" id="modalConfirmCredenciado.Cplaca" ng-model="modalConfirmCredenciado.Cplaca" ui-mask="AAA-9999" required>
+                                    <!--<div class="input-group-btn">
+                                        <button type="button" class="btn btn-danger" ng-click="validarPlacaTAGconfirm(modalConfirmCredenciado.Cplaca)">Buscar</button>
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                        <!--TAG-->
+                        <!--<div class="form-group">
+                            <label for="modalConfirmCredenciado.Ctag" class="col-lg-4 control-label">Tag de Cobrança</label>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="modalConfirmCredenciado.Ctag" ng-model="modalConfirmCredenciado.Ctag" placeholder="Tag" readonly="readonly" required>
+                            </div>
+                        </div>-->
+                        <!--CPF/CNPJ-->
+                        <div class="form-group">
+                            <label for="modalConfirmCredenciado.Ccnpj_cpf" class="col-lg-4 control-label">CPF / CNPJ</label>
+                            <div class="col-lg-8">
+                                <input type="text" class="form-control" id="modalConfirmCredenciado.Ccnpj_cpf" ng-model="modalConfirmCredenciado.Ccnpj_cpf" placeholder="CPF-CNPJ" ui-br-cpfcnpj-mask required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!--Botão Validar-->
+                    <div class="btn-group ">
+                        <button type="submit" class="btn btn-danger col" ng-click="Submit">
+                            <span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;
+                            Validar
+                        </button>
+                    </div>
+                    <!--Botão Cancelar-->
+                    <div class="btn-group ">
+                        <a href="#" class="btn btn-default col" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;
+                            Cancelar
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+﻿<div id="div_categoria" ng-if="pagina=='Categorias'" ng-controller="CategoriaCtrl">
+    <!-- MODAL CONFIRMA DELETE -->
+    <dir-confirmdelete></dir-confirmdelete>
+
+    <!-- MODAL CONVENIADO -->
+    <dir-modalconveniado ng-controller="ConveniadoCtrl"></dir-modalconveniado>
+
+    <!-- MODAL CATEGORIA -->
+    <dir-modalcategoria></dir-modalcategoria>
+
+    <!-- CONTEUDO -->
+    <span class="animate-if">
+        <div>
+            <accordion>
+                <!-- Filtro -->
+                <accordion-group heading="FILTRO" is-open="accordion.isFilterOpen">
+                    <form class="form-horizontal" name="frmFiltro" ng-submit="submitFormFiltro()">
+                        <fieldset>
+    
+                            <div class="form-group">
+                                <label for="frmFiltroValues.Id_categoria" class="col-lg-2 control-label">Código</label>
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" id="frmFiltroValues.Id_categoria" ng-model="frmFiltroValues.Id_categoria" placeholder="Código da Categoria">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="frmFiltroValues.Cnome" class="col-lg-2 control-label">Nome</label>
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" id="frmFiltroValues.Cnome" ng-model="frmFiltroValues.Cnome" placeholder="Nome da Categoria">
+                                </div>
+                            </div>
+                            <div class="col-sm-9 col-sm-offset-4">
+                                <button type="submit" class="btn btn-success col-sm-2" ng-click="Submit">Filtrar</button>
+                                <button type="button" class="btn btn-primary col-sm-2 col-sm-offset-1" ng-click="limpaFormFiltro()">Limpar</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </accordion-group>
+                <!-- Resultado -->
+                <accordion-group heading="RESULTADOS" is-open="accordion.isFirstOpen">
+                    <div class="btn-group ">
+                        <a href="#" class="btn btn-success col" ng-click="visualizarNovaCategoria()">
+                            <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;
+                            Adicionar
+                        </a>
+                    </div>
+                    <!--RESULTADOS -->
+                    <div class="btn-group pull-right">
+                        <a href="#" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Registros Por Página&nbsp;&nbsp;<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="" ng-click="setRegistrosPorPagina('25')">25</a></li>
+                            <li><a href="" ng-click="setRegistrosPorPagina('50')">50</a></li>
+                            <li><a href="" ng-click="setRegistrosPorPagina('75')">75</a></li>
+                            <li><a href="" ng-click="setRegistrosPorPagina('100')">100</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#" ng-click="setRegistrosPorPagina('100000')">Todos</a></li>
+                        </ul>
+                    </div>
+                    <br /><br />
+                    <table tr-ng-grid="" items="lstCategoria" page-items="porPagina" locale="ptbr">
+                        <thead>
+                            <tr display-align="left">
+                                <th field-name="tb_conveniado.Cnome" display-name="Conveniado" enable-filtering="true" enable-sorting="true"></th>
+                                <th field-name="Id_categoria" display-name="Codigo" enable-filtering="true" enable-sorting="true"></th>
+                                <th field-name="Cnome" display-name="Nome" enable-filtering="true" enable-sorting="true"></th>
+                                <th field-name="computedIvalor" display-name="Valor" enable-filtering="true" enable-sorting="true" display-format="formataValor:gridItem"></th>
+                                <th display-name="Ações" display-format="uppercase" enable-filtering="false" enable-sorting="false" display-align="center" cell-width="20em"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="btn-group ">
+                                        <a href="#" class="btn btn-info col" ng-click="visualizar(gridItem)">
+                                            <span class="glyphicon glyphicon-zoom-in"></span>&nbsp;&nbsp;
+                                            Visualizar
+                                        </a>
+                                    </div>
+                                    <div class="btn-group col-lg-offset-1">
+                                        <a href="#" class="btn btn-danger col" ng-click="visualizarConfirmarDelete(gridItem.Id)">
+                                            <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;
+                                            Excluir
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="btn-group ">
+                        <a href="#" class="btn btn-success col" ng-click="visualizarNovaCategoria()">
+                            <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;
+                            Adicionar
+                        </a>
+                    </div>
+                </accordion-group>
+            </accordion>
+        </div>
+    </span>
+</div>

@@ -1,0 +1,27 @@
+﻿   <!-- MODAL CONFIRM DELETE -->
+<div class="modal fade" id="modalConfirm">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Alerta!</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{modalmessage}}</p>
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group ">
+                    <a href="#" class="btn btn-danger col" ng-click="deletar(idDelete)">
+                        <span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;
+                        Confirmar
+                    </a>
+                </div>
+                <div class="btn-group ">
+                    <a href="#" class="btn btn-default col" data-dismiss="modal">
+                        <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;
+                        Cancelar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

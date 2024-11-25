@@ -1,0 +1,28 @@
+name: vice
+channels:
+ - defaults
+ - conda-forge
+ - pytorch
+dependencies:
+ - python=3.9
+ - numpy=1.19.*
+ - ftfy=5.8
+ - pandas=1.0.*
+ - scikit-learn=0.24.*
+ - scikit-image=0.16.*
+ - pytorch=1.11.*
+ - tqdm=4.47.*
+ - numba=0.53.*
+ - matplotlib=3.2.*
+ - seaborn=0.11.*
+ - statsmodels=0.12.*
+ - regex
+ - scipy
+ - h5py
+ - pip
+ - pip:
+   - functorch==0.1.*
+   - pyflakes
+   - codecov
+   - black
+   - pep8

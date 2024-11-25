@@ -1,0 +1,276 @@
+﻿<div class="modal fade" id="modalContrato">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" name="frmModalContrato" id="frmModalContrato" ng-submit="submitModalContrato()">
+                <div class="modal-header">
+                    <h4 class="modal-title" ng-show="!frmModalContrato.Id">Novo Contrato</h4>
+                    <h4 class="modal-title" ng-show="frmModalContrato.Id">Contrato: {{frmModalContrato.tb_credenciado.Cnome}}</h4>
+                </div>
+                <div class="modal-body">
+                    <tabset justified="true">
+                        <!--Tab CREDENCIADO-->
+                        <tab heading="Credenciado" active="_tab_active=='Credenciado'" ng-click="selecttab('Credenciado')">
+                            <!--<tab heading="Credenciado" >-->
+                            <p>
+                                <fieldset>
+                                    <div class="alert-danger" ng-if="!isvalid">{{modalmessage}}</div><br />
+                                    <!--ID-->
+                                    <div class="form-group" ng-show="frmModalContrato.tb_credenciado.Id==0">
+                                        <label for="frmModalContrato.tb_credenciado.Id" class="col-lg-3 control-label">ID</label>
+                                        <div class="col-lg-9">
+                                            <input type="text" class="form-control" id="frmModalContrato.tb_credenciado.Id" ng-model="frmModalContrato.tb_credenciado.Id" placeholder="ID de Credenciado" readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <!--NOME-->
+                                    <div class="form-group">
+                                        <label for="frmModalContrato.tb_credenciado.Cnome" class="col-lg-3 control-label">Nome</label>
+                                        <div class="col-lg-9">
+                                            <input type="text" class="form-control" id="frmModalContrato.tb_credenciado.Cnome" ng-model="frmModalContrato.tb_credenciado.Cnome" placeholder="Nome" readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <!--CNPJ/CPF-->
+                                    <div class="form-group">
+                                        <label for="frmModalContrato.tb_credenciado.Ccnpj_cpf" class="col-lg-3 control-label">CNPJ/CPF</label>
+                                        <div class="col-lg-9">
+                                            <input type="text" class="form-control" id="frmModalContrato.tb_credenciado.Ccnpj_cpf" ng-model="frmModalContrato.tb_credenciado.Ccnpj_cpf" placeholder="CNPJ / CPF" ui-br-cpfcnpj-mask readonly="readonly">
+                                        </div>
+                                    </div>
+
+                                    <!--TEL CEL-->
+                                    <div class="form-group">
+                                        <label for="frmModalContrato.tb_credenciado.Cfonecel" class="col-lg-3 control-label">Telefone Celular</label>
+                                        <div class="col-lg-9">
+                                            <input type="text" class="form-control" id="frmModalContrato.tb_credenciado.Cfonecel" ng-model="frmModalContrato.tb_credenciado.Cfonecel" ui-br-phone-number readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <!--TEL RES-->
+                                    <div class="form-group">
+                                        <label for="frmModalContrato.tb_credenciado.Cfone" class="col-lg-3 control-label">Telefone Residencial</label>
+                                        <div class="col-lg-9">
+                                            <input type="text" class="form-control" id="frmModalContrato.tb_credenciado.Cfone" ng-model="frmModalContrato.tb_credenciado.Cfone" ui-br-phone-number readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <!--TEL COM-->
+                                    <div class="form-group">
+                                        <label for="frmModalContrato.tb_credenciado.Cfonecom" class="col-lg-3 control-label">Telefone Comercial</label>
+                                        <div class="col-lg-9">
+                                            <input type="text" class="form-control" id="frmModalContrato.tb_credenciado.Cfonecom" ng-model="frmModalContrato.tb_credenciado.Cfonecom" ui-br-phone-number readonly="readonly">
+                                        </div>
+                                    </div>
+                                    <!--EMAIL-->
+                                    <div class="form-group">
+                                        <label for="frmModalContrato.tb_credenciado.Cemail" class="col-lg-3 control-label">Email</label>
+                                        <div class="col-lg-9">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">@</div>
+                                                <input type="email" class="form-control" id="frmModalContrato.tb_credenciado.Cemail" ng-model="frmModalContrato.tb_credenciado.Cemail" placeholder="email@dominio.com.br" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </fieldset>
+                            </p>
+                        </tab>
+                        <!--Tab CONTRATO-->
+                        <tab heading="Contrato" active="_tab_active=='Contrato'" ng-click="selecttab('Contrato')">
+                            <!-- <tab heading="Contrato" >-->
+
+                            <fieldset>
+ 
+                                <div class="alert-danger" ng-if="!isvalid">{{modalmessage}}</div><br />
+
+                                <!--ID CONTRATO-->
+                                <div class="form-group" ng-show="frmModalContrato.Id==0">
+                                    <label for="frmModalContrato.Id" class="col-lg-4 control-label">ID Contrato</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="frmModalContrato.Id" ng-model="frmModalContrato.Id" placeholder="ID de Contrato" readonly="readonly" >
+                                    </div>
+                                </div>
+                                <!--NUM CONTRATO-->
+                                <div class="form-group">
+                                    <label for="frmModalContrato.Cnro_contrato" class="col-lg-4 control-label">Contrato</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" name="Cnro_contrato" id="frmModalContrato.Cnro_contrato" ng-model="frmModalContrato.Cnro_contrato" placeholder="Nome do Contrato" >
+                                    </div>
+                                </div>
+                                <!-- CATEGORIA/CONVENIADO -->
+                                <div class="form-group">
+                                    <label for="frmModalContrato.Ccategoria" class="col-lg-4 control-label">Categorias</label>
+                                    <div class="col-lg-8">
+                                        <select class="form-control selectpickercat" id="frmModalContrato.Ccategoria" ng-model="frmModalContrato.Ccategoria" data-style="btn-primary" data-live-search="true" multiple>
+                                            <optgroup ng-repeat="conveniado in lstCategoriaConveniado" label="{{conveniado.Cnome}}" data-max-options="1">
+                                                <option ng-repeat="categoria in conveniado.tb_categoria" ng-init="tttcat(categoria)" value="{{categoria.Id}}">{{categoria.Cnome}}</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <!-- EMPRESA/CONVENIADO -->
+                                <div class="form-group">
+                                    <label for="frmModalContrato.Cempresa" class="col-lg-4 control-label">Empresa</label>
+                                    <div class="col-lg-8">
+                                        <select class="form-control selectpickeremp" id="frmModalContrato.Cempresa" ng-model="frmModalContrato.Cempresa" data-style="btn-primary" data-live-search="true" multiple>
+                                            <optgroup ng-repeat="conveniado in lstCategoriaConveniado | lstCategoriaConveniadoFiltrado:frmModalContrato.Ccategoria" label="{{conveniado.Cnome}}" data-max-options="1">
+                                                <option ng-repeat="empresa in conveniado.tb_empresa" ng-init="tttemp(empresa)" value="{{empresa.Id}}">{{empresa.Cnome}}</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!--QTD VAGAS-->
+                                <div class="form-group">
+                                    <label for="frmModalContrato.Iqtde_vagas" class="col-lg-4 control-label">Quantidade de Vagas</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="frmModalContrato.Iqtde_vagas" ng-model="frmModalContrato.Iqtde_vagas" placeholder="Numero de Vagas" ui-number>
+                                    </div>
+                                </div>
+                                <!--VALOR-->
+                                <div class="form-group">
+                                    <label for="frmModalContrato.Ivalor" class="col-lg-4 control-label">Valor do Contrato</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="frmModalContrato.Ivalor" ng-model="frmModalContrato.Ivalor"  ui-money-mask>
+                                    </div>
+                                </div>
+
+                                <!--Vigência Início-->
+                                <div class="form-group">
+                                    <label for="frmModalContrato.Tsvigencia_inicio" class="col-lg-4 control-label">Vigência Início</label>
+                                    <div class="col-lg-8">
+                                        <div class="input-group">
+                                         
+                                            <input id="frmModalContrato.Tsvigencia_inicio" class="form-control" pick-a-date="frmModalContrato.Tsvigencia_inicio" date-model="frmModalContrato.Tsvigencia_inicio" max-date="frmModalContrato.Tsvigencia_fim" pick-a-date-options="{ format: 'dd/mm/yyyy', selectYears: false }">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!--Vigência Fim-->
+                                <div class="form-group">
+                                    <label for="frmModalContrato.Tsvigencia_fim" class="col-lg-4 control-label">Vigência Fim</label>
+                                    <div class="col-lg-8">
+                                        <div class="input-group">
+                                            <input id="frmModalContrato.Tsvigencia_fim" class="form-control" pick-a-date="frmModalContrato.Tsvigencia_fim" date-model="frmModalContrato.Tsvigencia_fim" min-date="frmModalContrato.Tsvigencia_inicio" pick-a-date-options="{ format: 'dd/mm/yyyy', selectYears: false }" >
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--STATUS-->
+                                <div class="form-group">
+                                    <label for="frmModalContrato.Cativo" class="col-lg-4 control-label">Status</label>
+                                    <div class="col-lg-8">
+                                        <select class="form-control" id="frmModalContrato.Cativo" ng-model="frmModalContrato.Cativo" >
+                                            <option value="Ativo">Ativo</option>
+                                            <option value="Inativo">Inativo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                 
+                            </fieldset>
+                        </tab>
+                        <!--Tab VEICULO-->
+                        <tab heading="Veiculo" active="_tab_active=='Veiculo'" ng-click="selecttab('Veiculo')">
+                            <!--       <tab heading="Veiculo">-->
+                            <fieldset>
+
+                                <div class="alert-danger" ng-if="!isvalid">{{modalmessage}}</div><br />
+                                <!--LISTA DE VEICULOS POR CONTRATO-->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Lista de Veiculo
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="list-group">
+                                            <div class="list-group-item" ng-repeat="veiculo in frmModalContrato.tb_usertag" ng-if="veiculo.msg!='deleted'">
+                                                <!--Placa-->
+                                                <label class="list-group-item-text">Placa: {{veiculo.Cplaca}}&nbsp;&nbsp;-&nbsp;&nbsp;</label>
+                                                <!--Tag-->
+                                                <label class="list-group-item-text">Tag: {{veiculo.Ltag}}</label>
+                                                <!--Excluir-->
+                                                <div class="pull-right center-block">
+                                                    <a href="#" class="btn btn-danger btn-xs" ng-click="deletarVeiculoContrato(veiculo)">
+                                                        <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;
+                                                        Excluir
+                                                    </a>
+                                                </div>
+                                                <!--Cobrança-->
+                                                <div class="pull-right" ng-if="veiculo.Cplaca==frmModalContrato.tb_credenciado.Cplaca">
+                                                    <a href="#" class="btn btn-success btn-xs">
+                                                        <span class="glyphicon glyphicon-exclamation-sign"></span>
+                                                        Veiculo de Cobrança
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--ADICIONAR NOVO VEICULOS AO CONTRATO-->
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Adicionar Novo Veiculo
+                                    </div>
+                                    <div class="panel-body">
+                                        <!--PLACA + BUSCAR-->
+                                        <div class="form-group">
+                                            <label for="frmModalContrato.CplacaAdd" class="col-lg-3 control-label">Placa</label>
+                                            <div class="col-lg-9">
+                                                <div class="input-group">
+                                                    <input class="form-control" id="frmModalContrato.CplacaAdd" ng-model="frmModalContrato.CplacaAdd" ui-mask="AAA-9999">
+                                                    <div class="input-group-btn">
+                                                        <button type="button" class="btn btn-danger" ng-click="validarPlacaTAGmodal(frmModalContrato.CplacaAdd)">Buscar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--TAG-->
+                                        <div class="form-group">
+                                            <label for="frmModalContrato.CtagAdd" class="col-lg-3 control-label">Tag do Veiculo</label>
+                                            <div class="col-lg-9">
+                                                <input type="text" class="form-control" id="frmModalContrato.CtagAdd" ng-model="frmModalContrato.CtagAdd" placeholder="Tag" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <!--Adicionar-->
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-success col" ng-click="adicionarNovoVeiculo()">
+                                                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;
+                                                Adicionar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </tab>
+                    </tabset>
+                </div>
+                <div class="modal-footer">
+                    <!--Botão Gravar-->
+                    <div class="btn-group ">
+                        <button type="submit" class="btn btn-danger col" ng-click="Submit">
+                            <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;
+                            Gravar
+                        </button>
+                    </div>
+                    <!--Botão Cancelar-->
+                    <div class="btn-group ">
+                        <button type="submit" class="btn btn-default col" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;
+                            Cancelar
+                        </button>
+                    </div>
+                    <!--Botão LIXO TESTE-->
+                    <!--<div class="btn-group ">
+                        <button ng-click="teste()" class="btn btn-default col">
+                            <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;&nbsp;
+                            LIXO
+                        </button>
+                    </div>-->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

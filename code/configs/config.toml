@@ -1,0 +1,174 @@
+PROJECT_NAME = "FaceSim3D"
+PROJECT_ICON = "🗿"  # stone head emoji
+PROJECT_ICON_URL = "https://em-content.zobj.net/thumbs/120/apple/325/moai_1f5ff.png"
+PROJECT_ICON_URL2 = "https://em-content.zobj.net/thumbs/120/emojidex/112/moyai_1f5ff.png"
+
+[params]
+SESSIONS = ["2D", "3D"]
+BONUS = 0.1  # bonus for participants who did not miss any catch trials (no bonus: BONUS=0 / False)
+MIN_RT_2D = 0.97  # minimum response time (in seconds) to be considered a valid response (0.1% quantile)
+MIN_RT_3D = 1.10  # minimum response time (in seconds) to be considered a valid response (0.1% quantile)
+PILOT = false
+PILOT_VERSION = 2
+DATA_MODES = ["2d-original", "3d-reconstructions", "3d-perspectives"]
+GENDERS = ["female", "male"]
+n_train_trials = 4  # number of training trials
+n_blocks_train = 1  # first block
+n_blocks_main = 3
+n_catch_trials = 9  # (3 per block)
+
+[params.quality]  # params for data quality (fore more, see `datachecks.py`)
+MAX_CATCH = 3  # threshold number of catch trials when a participant is excluded
+
+[params.model.vgg.behave]
+DECISION_BLOCKS = ["conv", "fc"]
+
+[params.main]
+n_faces = 100
+
+[params.multisubsample]
+n_faces = 20
+n_reps = 5
+face_indices = [9, 12, 15, 24, 28, 34, 35, 42, 45, 49, 52, 58, 60, 62, 64, 67, 73, 77, 78, 89]
+
+[params.pilot.v1]
+n_faces = 30
+
+[params.pilot.v2]
+n_faces = 25
+
+# all paths are relative to the PROJECT_ROOT folder named PROJECT_NAME
+[paths]
+TESTS = "./code/tests"
+DATA = "./data"
+
+[paths.data]
+CFD = "./data/faces/CFD"
+MAIN = "./data/main"
+CACHE = "./data/cache"
+
+[paths.data.cfd]
+faceviews = "./data/faces/CFD/3D-reconstructions_different_angles"
+
+[paths.data.unity]
+cfd = "./experiment/FaceSimExp/Assets/Faces/CFD/"
+
+[paths.data.main]
+qc = "./data/main/qualitycheck"
+prolific = "./data/main/via_Prolific"
+s3 = "./data/main/via_S3"
+archive = "./data/main/archive"
+spose = "./data/main/for_SPoSE"
+# vice = "./data/main/for_VICE"
+triplets = "./data/faces/triplets_main.csv"
+
+[paths.data.pilot]
+v1 = "./data/pilot/v1"
+v2 = "./data/pilot/v2"
+triplets = "./data/faces/triplets_pilot.csv"
+
+[paths.data.facemodel]
+deca = "./data/faces/CFD/FaceModel/DECA"
+flame = "./data/faces/CFD/FaceModel/FLAMEfit"
+
+[paths.data.models]
+vggface = "./data/models/vgg_face_torch"
+vggbehave = "./data/models/vgg_behavior"
+multiview = "./data/models/multiview"
+
+[paths.data.models.vgg]
+output_shapes = "./data/models/vgg_output_shapes.tsv"
+
+[paths.data.models.behave]
+hp_table = "./data/models/vgg_behavior/hp_vgg_behave.csv"
+hp_table_gender = "./data/models/vgg_behavior/{gender}_only_trials/hp_vgg_behave.csv"
+[paths.data.models.behave.hp_search]
+hp_table = "./data/models/vgg_behavior/hp_search/hp_vgg_behave.csv"
+hp_table_gender = "./data/models/vgg_behavior/hp_search/{gender}_only_trials/hp_vgg_behave.csv"
+
+[paths.results]
+MAIN = "./results/main"
+PILOT = "./results/pilot"
+
+[paths.results.heads]
+vggface = "./results/heads/VGGface"
+vggbehave = "./results/heads/VGGbehavior"
+
+[paths.results.main]
+behavior = "./results/main/behavior"
+rdms = "./results/main/rdms"
+rsa = "./results/main/rsa"
+spose = "./results/main/SPoSE"
+vice = "./results/main/VICE"
+VGG = "./results/main/VGG"
+NOISE_CEILING = "./results/main/noiseceiling"
+rt = "./results/main/rt"
+
+[paths.results.main.vgg]
+feature_maps = "./results/main/VGG/{session}/feature_maps"
+
+[paths.results.main.noise_ceiling]
+accuracy_table = "./results/main/noiseceiling/max_empirical_accuracy.csv"
+r_table = "./results/main/noiseceiling/max_empirical_{corr_name}_r.csv"
+
+[paths.results.pilot]
+V1 = "./results/pilot/v1"
+V2 = "./results/pilot/v2"
+
+[paths.results.pilot.v1]
+rdms = "./results/pilot/v1/rdms"
+[paths.results.pilot.v2]
+rdms = "./results/pilot/v2/rdms"
+rsa = "./results/pilot/v2/rsa"
+spose = "./results/pilot/v2/SPoSE"
+vice = "./results/pilot/v2/VICE"
+
+[params.spose]
+# Best HP after search for both sessions (2D, 3D)
+lambda_ = 0.005
+
+[params.vice]
+# Best HPs after search for both sessions (2D, 3D)
+hp_perc = 20
+modality = "behavioral"
+dims = 30
+optim = "adam"
+prior = "laplace"
+spike = 0.05
+slab = 2.0
+pi = 0.4
+seed = 42
+
+[logging]
+version = 1  # currently only version 1
+disable_existing_loggers = false
+
+[logging.formatters.fmtfile]
+format = "{asctime:23} :: {name} :: {levelname:^8} :: {message}"
+style = "{"
+# datefmt = "%H:%M:%S"
+
+[logging.formatters.console]
+format = "\n\t{asctime:19} :: {name} :: {levelname:^8} :: {message}\n"
+style = "{"
+datefmt = "%Y-%m-%d %H:%M:%S"
+
+[logging.handlers.file_handler]
+level = "DEBUG"   # == 10  (pass int or string)
+formatter = "fmtfile"
+filename = "data/models/vgg_behavior/logs/vgg_predict.log"  # parent dir must exist
+class = "logging.FileHandler"
+# class = "logging.handlers.RotatingFileHandler"
+# maxBytes = 5_000_000  # approx. 5 MB
+# backupCount=20
+
+[logging.handlers.stream_handler]
+level = 20 # == "INFO"
+formatter = "console"
+class = "logging.StreamHandler"
+
+[logging.loggers.__main__]  # __name__ of the calling module
+level = "INFO"  # == 20
+# logging.DEBUG == 10 < ...INFO == 20 < WARNING == 30 < ERROR == 40 < CRITICAL == 50
+propagate = true
+handlers = ["file_handler", "stream_handler"]

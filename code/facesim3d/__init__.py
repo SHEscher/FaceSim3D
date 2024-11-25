@@ -6,6 +6,6 @@ __year__ = "2022-2024"
 
 import warnings
 
-import facesim3d.configs  # noqa: F401
+import facesim3d.configs
 
 warnings.filterwarnings(action="ignore", category=FutureWarning)

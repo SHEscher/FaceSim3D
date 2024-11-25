@@ -1,0 +1,74 @@
+﻿<ul class="nav navbar-nav">
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="cmdlist">
+            Comandos&nbsp; <span ng-if="cmdcount>0" class="badge">{{cmdcount}}</span>&nbsp;&nbsp;<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="themes">
+            <li ng-repeat="comando in cmdlist">
+                <a ng-click="opencmd(comando)" data-toggle="tooltip" data-placement="left" title="Comando: {{comando.Ccomando}}">
+                    <img ng-if="!comando.executado" src="imgs/page-loader.gif" style="height:24px;width:24px;" />
+                    <span ng-if="comando.executado" class="glyphicon glyphicon-ok" style="color:green"></span>
+                    ({{getStartString(comando.Ccomando)}}) em {{comando.Cip}}
+                </a>
+            </li>
+            <li ng-if="contemPrivilegio('root')" class="divider"></li>
+            <li ng-if="contemPrivilegio('root')">
+                <a ng-click="showaddcmd()">Adicionar comando</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<div ng-if="showbox" style="position:absolute;z-index:9999;left:50vh;top:10vh;width:50%;height:80%">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">Comando {{currentcmd.Id}} em {{currentcmd.Cip}}</div>
+        </div>
+        <div class="panel-body" style="overflow-y:scroll;height:60vh">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Comando:
+                </div>
+                <div class="panel-body">
+                    {{currentcmd.Ccomando}}
+                </div>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Resultado:
+                </div>
+                <div class="panel-body">
+                    <span style="white-space: pre;"> {{currentcmd.response}}</div></span>
+            </div>
+        </div>
+
+        <div class="panel-footer">
+            <div class="row" style="padding:10px">
+                <button class="btn btn-default pull-right" style="margin-left:10px;margin-right:10px" ng-click="hidecmd()">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-if="showadd" style="position:absolute;z-index:9999;left:50vh;top:30vh;width:50%;height:300px">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">Enviar comando:</div>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label>Comando</label>
+                    <input type="text" class="form-control" placeholder="type c:\sce\sce.ini" ng-model="cmdtxt">
+                <label>Destino</label>
+                <input type="text" class="form-control" placeholder="scewxxxx" ng-model="desttxt">
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row" style="padding:10px">
+                <button class="btn btn-primary pull-right" ng-click="createCommand(cmdtxt,desttxt)" ng-disabled="disablebtn">Enviar</button> 
+                <button class="btn btn-default pull-right" style="margin-left:10px;margin-right:10px" ng-disabled="disablebtn" ng-click="hideaddcmd()"><span ng-if="!disablebtn">Cancelar</span><span ng-if="disablebtn">Fechar</span></button>
+            </div>
+        </div>
+    </div>
+</div>

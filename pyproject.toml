@@ -1,0 +1,333 @@
+[project]
+name = "FaceSim3D"
+version = "0.0.0"
+description = "Testing the effect of dynamic 3D viewing conditions on face similarity perception."
+readme = "README.md"
+requires-python = ">=3.10, <3.11"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Simon M. Hofmann", email = "simon.hofmann@cbs.mpg.de" },
+    { name = "Anthony Ciston", email = "ciston@cbs.mpg.de" },  # experimental code
+    { name = "Abhay Koushik", email = "koushik@cbs.mpg.de" },  # experimental code
+]
+maintainers = [
+    { name = "Simon M. Hofmann", email = "simon.hofmann@cbs.mpg.de" },
+]
+keywords = [
+    "2D", "3D", "cognitive computational models", "explainable A.I.", "XAI", "face space", "online study",
+    "peceptual invariance", "perceptual optimization", "representation", "alignment", "RSA", "similarity judgements",
+    "volumetric face features", "perception"
+]
+# Check for classifiers: https://pypi.org/classifiers/
+classifiers = [
+    "Development Status :: 6 - Mature",
+    "Intended Audience :: Science/Research",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+]
+# Install the project code as Python module with `pip install -e .` or `pip install -e ".[develop,...]"`
+dependencies = [
+    "boto3==1.28.53",
+    "ipykernel==6.29.5",
+    "jupyterlab==4.2.5",
+    "matplotlib==3.8.0",
+    "numpy==1.23.5",
+    "openpyxl==3.1.2",
+    "opencv-python==4.5.5.64",
+    "pandas==1.5.3",
+    "pillow==10.2.0",
+    "psutil==5.9.6",
+    "requests==2.31.0",
+    "rsatoolbox==0.0.4",
+    "scikit_learn==1.2.1",
+    "scipy==1.9.3",
+    "seaborn==0.12.2",
+    "tabulate==0.9.0",
+    "tensorboard==2.12.3",
+    "toml==0.10.2",
+    "torch==1.12.1",
+    "torchvision==0.13.1",
+    "torchsummary==1.5.1",
+    "torchviz==0.0.2",
+    "tqdm==4.66.1",
+    "ut @ git+https://github.com/SHEscher/ut.ils.git",
+    "vedo==2022.4.1",
+]
+
+[project.optional-dependencies]
+# The following can be co-installed with `pip install -e .[develop]`
+develop = [
+    "bumpver==2024.1130",
+    "ruff==0.8.0",
+    "pre-commit==4.0.1",
+    "pytest==8.3.3",
+    "pytest-cov==6.0.0",
+]
+
+# Install with `pip install -e .[spose]`
+spose = [
+    "ftfy==6.1.1",
+    "scikit-image==0.19.2",
+    "numba==0.55.2",
+    "regex==2022.7.25",
+]
+# Install with `pip install -e .[vice]`
+vice = [
+    "functorch",
+    "h5py==3.7.0",
+    "statsmodels==0.13.2",
+]
+
+docs = [
+    "backports.tarfile==1.2.0",
+    "blacken-docs==1.19.1",
+    "docutils==0.21.2",
+    "jupyter_contrib_nbextensions==0.2.2",
+    "notebook==6.4.12",
+    "markdown-callouts==0.4.0",
+    "markdown-exec[ansi]==1.9.3",
+    "mkdocs==1.6.1",
+    "mkdocs-autorefs==1.2.0",
+    "mkdocs-bibtex==2.16.2",
+    "mkdocs-coverage==1.1.0",
+    "mkdocs-gen-files==0.5.0",
+    "mkdocs-jupyter==0.25.1",
+    "mkdocs-literate-nav==0.6.1",
+    "mkdocs-material==9.5.44",
+    "mkdocs-material-extensions==1.3.1",
+    "mkdocs-minify-plugin==0.8.0",
+    "mkdocs-redirects==1.2.1",
+    "mkdocstrings[python]==0.26.2", # add language-specific extensions
+    "pypandoc==1.12",  # if there is an issue with, install it via `conda install -c conda-forge pypandoc==1.12`
+]
+
+[project.urls]
+homepage = "https://neurohum.cbs.mpg.de"
+documentation = "https://shescher.github.io/facesim3d/"
+repository = "https://github.com/SHEscher/FaceSim3D"
+OSF = "https://osf.io/4a2jf/"
+preregistration = "https://osf.io/678uh"
+# TODO: add data repository
+
+# Entry points for the project
+# For a command line interface (CLI) [uncomment and/or adopt the following if needed]
+# [project.scripts]
+# facesim3d = "facesim3d.main:main"
+
+[tool.setuptools]
+platforms = [
+    "unix",
+    "linux",
+    "osx",
+]
+zip-safe = false
+
+# To automatically find the package(s) (Beta feature (Oct, 2022)):
+[tool.setuptools.packages.find]
+where = ["code"]
+include = [
+    "facesim3d",
+    "facesim3d.*",
+]
+exclude = ["tests", "notebooks", "configs"]
+
+# Include non-python files in the package (uncomment if needed)
+# [tool.setuptools.package_data]
+# facesim3d = ["*.txt", "*.rst"]
+
+# Exclude specific non-python files in the package (uncomment if needed)
+# [tool.setuptools.exclude-package-data]
+# facesim3d = [".gitattributes"]
+
+# ALL ABOVE IS AN ADAPTATION OF THE FORMER setup.cfg
+# ALL BELOW WAS ALREADY PART OF pyproject.toml [Oct, 2022]
+
+[build-system]
+requires = ["setuptools>=75.3.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+#addopts = "--cov=facesim3d"
+testpaths = ["code/tests"]
+
+[tool.mypy]
+mypy_path = "code"
+check_untyped_defs = true
+disallow_any_generics = true
+ignore_missing_imports = true
+no_implicit_optional = true
+show_error_codes = true
+strict_equality = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+warn_unused_configs = true
+no_implicit_reexport = true
+
+[tool.coverage.run] # https://coverage.readthedocs.io/en/latest/config.html
+data_file = "code/tests/.coverage"
+
+[tool.coverage.report]
+exclude_lines = ["if __name__ == .__main__.:", "if TYPE_CHECKING:", "@abstract"]
+
+[tool.coverage.html]
+directory = "code/tests/coverage_html_report"
+
+[tool.ruff]
+# Select rules / linters to apply
+lint.select = [
+    # "ALL", # all rules
+    "D",   # pydocstyle
+    "E",   # pycodestyle [default]
+    "F",   # Pyflakes [default]
+    "I",   # isort imports
+    "RUF", # ruff specific
+    "UP",  # pyupgrade [default]
+    "W",   # pycodestyle: warning
+    "C90", # mccabe
+    "N",   # pep8-naming
+    # "ANN", # flake8-annotations
+    "S",   # flake8-bandit
+    "BLE", # flake8-blind-except
+    "B",   # flake8-bugbear
+    "A",   # flake8-builtins
+    "COM", # flake8-commas
+    "C4",  # flake8-comprehensions
+    # "EM", # flake8-errmsg
+    # "FA", # flake8-future-annotations (see ANN above)
+    "ISC", # flake8-implicit-str-concat
+    # "ICN", # flake8-import-conventions
+    "G",   # flake8-logging-format
+    "INP", # flake8-no-pep420
+    "PT",  # flake8-pytest-style
+    "Q",   # flake8-quotes
+    "RET", # flake8-return
+    "SIM", # flake8-simplify
+    "TCH", # flake8-type-checking
+    "ARG", # flake8-unused-arguments
+    "PTH", # flake8-use-pathlib
+    "TD",  # flake8-todos
+    "FIX", # flake8-fixme
+    "ERA", # eradicate
+    "PD",  # pandas-vet
+    "PL",  # Pylint
+    "NPY", # NumPy-specific rules
+] # run `ruff linter` to see all rules; run e.g., `ruff rule ERA001` to see specs of specific rule
+
+fix = false # true: Ruff will try to fix certain errors automatically
+
+# List of rules to consider non-autofix-able.
+lint.unfixable = [ # either with fix = true or when `ruff . --fix` is executed
+    "ERA001", # found commented-out code
+    "F401",   # unused imports
+    "RUF100", # `noqa` directives that are no longer applicable
+]
+
+# Ignore specific rules (e.g., "ANN102") or the whole set of a rule (e.g., "ANN")
+lint.ignore = [
+    "ANN401", # flake8-annotations: Any
+    "COM812", # Trailing comma missing
+    "D203",   # 1 blank line required before class docstring: incompatible with D211 (=no blank line required)
+    "D212",   # multi-line-summary-first-line incompatible with D213 (=should start at second line)
+    "DTZ005", # timezone-naive datetime
+    "E402",   # Module level import not at the top of a file (covert by ISORT)
+    # "E501", # Ignore line-length since 119 is used
+    # "ERA001", # Found commented-out code
+    "ISC001",  # single-line-implicit-string-concatenation [toogle if you use `ruff format`]
+    "NPY002", # Replace legacy `np.random.randn` call with `np.random.Generator`
+    "PLC0206", # Extracting value from dictionary without calling `.items()`
+    "S301",   # suspicious-pickle-usage
+    "TD002",  # Missing author in To-Do
+    "TD003",  # Missing issue link on the line following a To-Do
+]
+
+# lint.ignore-init-module-imports = true # void automatically removing unused imports in __init__.py
+respect-gitignore = true          # files and folder ignored in gitignore are ignored by ruff as well [default: true]
+
+src = ["code/facesim3d", "code/notebooks", "code/tests"]
+include = ["*.py", "*.pyi", "**/pyproject.toml", "*.ipynb"]
+
+# Exclude a variety of commonly ignored directories:
+extend-exclude = [
+    "code/facesim3d/modeling/SPoSE",
+    "code/facesim3d/modeling/VICE",
+    "code/configs",
+    "data",
+    "docs",
+    "experiment",
+    "literature",
+    "results",
+]
+
+line-length = 119 # same as flake8 & black
+target-version = "py310" # assume Python 3.10
+output-format = "concise" # or "grouped", "full", ...
+# preview = true  # true: Ruff will use unstable rules and fixes; default: false
+
+# Ignore specific rules in specific files
+[tool.ruff.lint.extend-per-file-ignores]
+"__init__.py" = ["F401", "D104"]
+"configs.py" = ["UP036", "UP038"]
+"*.ipynb" = ["D100"]                            # ignore docsstring in notebooks
+"code/tests/*.py" = ["S101", "PLC2701", "N802"] # ignore assert statements in tests, private name imports, and lowercase (tearDown, setUp)
+
+[tool.ruff.format]
+# Check: https://docs.astral.sh/ruff/settings/#format
+# quote-style = "single"  # default: "double"
+# indent-style = "tab"  # Use tabs instead of 4 space indentations.
+# skip-magic-trailing-comma = true # default: false
+docstring-code-format = true # default: false
+docstring-code-line-length = 80
+# preview = true # true: Ruff will use unstable rules for formatting; default: false
+
+# Configure specific linters
+[tool.ruff.lint.flake8-annotations]
+allow-star-arg-any = true
+ignore-fully-untyped = true
+suppress-none-returning = true
+
+[tool.ruff.lint.flake8-comprehensions]
+allow-dict-calls-with-keyword-arguments = true
+
+[tool.ruff.lint.flake8-type-checking]
+# quote-annotations = true # default: false
+
+[tool.ruff.lint.isort]
+known-local-folder = ["code/facesim3d"]
+# known-first-party = ...
+
+[tool.ruff.lint.mccabe]
+# Flag errors (`C901`) whenever the complexity level exceeds x.
+max-complexity = 40 # default x: 10
+
+[tool.ruff.lint.pep8-naming]
+ignore-names = [] # fill with specific class, function, variable names
+
+[tool.ruff.lint.pydocstyle]
+# convention = "google"  # "numpy", "pep257"
+
+[tool.ruff.lint.pylint]
+max-args = 12         # default: 5
+max-branches = 41     # default: 12
+max-locals = 15       # default: 15
+max-returns = 6       # default: 6
+max-statements = 136  # default: 50
+max-nested-blocks = 5 # default: 5
+# allow-magic-value-types = ["int"]
+
+# For instance, run in shell: bumpver update --patch --no-fetch --dry
+[tool.bumpver]
+current_version = "0.0.0"
+version_pattern = "MAJOR.MINOR.PATCH"
+pre_commit_hook = "scripts/badge.sh"
+commit_message = "bump version {old_version} -> {new_version}"
+commit = true
+tag = true
+push = false
+
+[tool.bumpver.file_patterns]
+"code/facesim3d/__init__.py" = ['^__version__ = "{version}"']
+"pyproject.toml" = ['current_version = "{version}"', '^version = "{version}"']
+"README.md" = ['version-v.{version}']
