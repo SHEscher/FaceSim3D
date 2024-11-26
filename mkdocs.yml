@@ -34,8 +34,8 @@ nav: # Files are relative to docs/
 # Sets the theme of the site.
 theme:
     name: material  # readthedocs
-    logo: Emoticon_FS3D.svg # project logo (use: *.svg or *.png)
-    favicon: assets/images/favicon/favicon.ico  # website / tab icon
+    logo: Emoticon_FS3D.svg  # project logo (use: *.svg or *.png)
+    favicon: assets/images/favicon/favico.ico  # website / tab icon
     # custom_dir: docs/custom_dir # add subfolder to overwrite
     features:
         - announce.dismiss  # Allows users to dismiss announcement banners or messages.
