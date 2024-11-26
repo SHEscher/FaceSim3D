@@ -1,8 +1,8 @@
 # Settings for the MkDocs documentation site generator.
 site_name: FaceSim3D  # Sets the name of the site.
 site_description: Run and analyse the FaceSim3D study (2022-2024).  # Sets the description of the site.
-# site_url: "https://SHEscher.github.io/facesim3d" # specifies the base URL for the site.
-# repo_url: "https://github.com/SHEscher/facesim3d" # specifies the URL of the Git repo where the source code for the site is hosted. This is used to generate links to the repo
+site_url: "https://shescher.github.io/FaceSim3D/" # specifies the base URL for the site.
+repo_url: "https://github.com/SHEscher/FaceSim3D" # specifies the URL of the Git repo where the source code for the site is hosted. This is used to generate links to the repo
 repo_name: "SHEscher/FaceSim3D"  # specifies the name of the repo where the source code for the documentation site is hosted.
 site_dir: "site"  # Sets the directory where the site will be built.
 watch: [ mkdocs.yml, README.md, code/facesim3d ]  # Sets the files to watch for changes.
@@ -18,18 +18,18 @@ nav: # Files are relative to docs/
     -   Home:
             -   General overview: index.md
             -   Publications: publications.md
-    -   Code:
+    -   Experiment:
+            -   Experiment overview: experiment.md
+    -   Results:
+            -   Results overview: results.md
+            -   Notebooks: notebooks/
+    -   Research Code:
             -   Code overview: code.md
             -   Analysis package: package.md
             -   API reference: reference/
             # -   Development:
             #         -   Coverage report: coverage.md
             -   License: license.md
-    -   Results:
-            -   Results overview: results.md
-            -   Notebooks: notebooks/
-    -   Experiment:
-            -   Experiment overview: experiment.md
 
 # Sets the theme of the site.
 theme:
@@ -39,7 +39,7 @@ theme:
     # custom_dir: docs/custom_dir # add subfolder to overwrite
     features:
         - announce.dismiss  # Allows users to dismiss announcement banners or messages.
-        - content.action.edit  # Provides a button or link to edit the current page's source code.
+        # - content.action.edit  # Provides a button or link to edit the current page's source code.
         - content.action.view  # Provides a button or link to view the current page's source code.
         - content.code.annotate  # Allows users to add annotations or comments to code blocks.
         - content.code.copy  # Provides a button or link to copy code blocks to the clipboard.
@@ -80,8 +80,9 @@ extra_css:
     - css/style.css
     - css/material.css
     - css/mkdocstrings.css
+    - css/extra.css
 
-# Sets the markdown extensions to use in the site.
+# Sets the Markdown extensions to use in the site.
 markdown_extensions:
     - attr_list  # Allows you to add attributes to headers, paragraphs, and other elements in Markdown.
     - admonition  # Adds admonition blocks, which are like callout boxes that highlight important information.
@@ -104,7 +105,7 @@ markdown_extensions:
             custom_checkbox: true
     - pymdownx.tilde  # Adds support for strikethrough text in Markdown.
     -   toc: # Adds a table of contents to your Markdown documents, with permalinks to each section.
-            permalink: "🗿︎"  # "✢"
+            permalink: "🗿"  # "✢"
 
 # Sets the plugins to use in the site.
 plugins:
@@ -119,12 +120,12 @@ plugins:
     - autorefs
     # -   coverage:
     #         page_path: coverage  # default [former `page_name` is deprecated]
-    #         html_report_dir: code/tests/coverage_html_report  # default htmlcov
+    #         html_report_dir: code/tests/coverage_html_report # default htmlcov
     -   mkdocs-jupyter: # https://github.com/danielfrg/mkdocs-jupyter
             # ignore_h1_titles: true # false: take title and show in navigator, true: take file name instead
             ignore: [ ".ipynb_checkpoints/*.ipynb", ".virtual_documents/*ipynb" ]
             # execute: true # execute the notebook before converting
-            kernel_name: face_3.10  # kernel to use for execution
+            kernel_name: face_gh_3.10  # kernel to use for execution
             # execute_ignore:
             #     - "my-secret-files/*.ipynb"
             # allow_errors: false
@@ -138,7 +139,7 @@ plugins:
                 remove_all_outputs_tags: # works only if execute: false
                     - hide_output
             # theme: dark # overwrites the theme setting for notebooks
-            # highlight_extra_classes: "custom-css-classes
+            # highlight_extra_classes: custom-css-classes
             # include_source: True # include the notebook source as download button
     -   mkdocstrings:
             handlers:
@@ -169,14 +170,10 @@ plugins:
             minify_html: !ENV [ DEPLOY, false ]
         #    -   redirects: # redirecting old URLs to new ones
         #            redirect_maps:
-        #                'code/README.md': 'code.md'
-        #                'data/README.md': 'data.md'
-        #                'experiment/README.md': 'experiment.md'
-        #                'organisation/README.md': 'organisation.md'
         #                'results/README.md': 'results.md'
-        #     'old.md': 'new.md'
-        #     'old/file.md': 'new/file.md'
-        #     'some_file.md': 'http://external.url.com/foobar'
+        #                'old.md': 'new.md'
+        #                'old/file.md': 'new/file.md'
+        #                'some_file.md': 'http://external.url.com/foobar'
     -   bibtex: # https://github.com/shyamd/mkdocs-bibtex/
             bib_file: literature/facesim3d.bib  # path or url to single *.bib file. Path can be absolute or relative to mkdocs.yml.
             bib_dir: literature  # dir for *.bib files to load, same as above for path resolution

@@ -1,10 +1,10 @@
 # FaceSim3D – **code**
 
-| Period                |    Status    |           Author |
-|-----------------------|:------------:|-----------------:|
-| Feb, 2022 - Sep, 2024 | `in process` | Simon M. Hofmann |
+| Period                |    Status    |                                                                                 Author |
+|-----------------------|:------------:|---------------------------------------------------------------------------------------:|
+| Feb, 2022 - Sep, 2024 | `in process` |  [Simon M. Hofmann](https://bsky.app/profile/smnhfmnn.bsky.social "Follow on Bluesky") |
 
-![Last update](https://img.shields.io/badge/last_update-Nov_25,_2024-green)
+![Last update](https://img.shields.io/badge/last_update-Nov_26,_2024-green "Partial paradigm")
 
 ***
 
@@ -26,11 +26,12 @@ The resulting activation maps (of all layers) were used to compute the similarit
 
 #### Cognitive models
 
-Modeling, i.e., predicting human similarity judgments in both conditions (2D & 3D).
+Modeling human similarity judgments in both viewing conditions (2D & 3D).
+To this end, sparse and deep encoding models were used to predict human similarity judgments.
 
 ##### Human-aligned `VGG-Face` activation maps
 
-An adaptation of the VGG-Face network was alighed to human choices in the face similarity task.
+An adaptation of the deep neural network **VGG-Face** was aligned to human choices in the face similarity task.
 Also, for this embedding model, similarity matrices were computed based on feature maps of the model.
 
 ##### Sparse embedding models: SPoSE & VICE
@@ -53,6 +54,7 @@ These vectors have been used to compute face similarity matrices.
 #### FLAME and DECA dimensions
 
 The 3D-reconstructed faces have corresponding FLAME and DECA dimensions.
+These dimensions have been used to compute further similarity matrices.
 
 ## Code structure
 

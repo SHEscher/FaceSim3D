@@ -2,9 +2,9 @@
 
 *Testing the effect of dynamic 3D viewing conditions on face similarity perception*
 
-![Last update](https://img.shields.io/badge/last_update-Nov_25,_2024-green)
+![Last update](https://img.shields.io/badge/last_update-Nov_26,_2024-green)
 ![version](https://img.shields.io/badge/version-v.1.0.0-blue)
-[![demo](https://img.shields.io/badge/pretty-docs-violet)](https://shescher.github.io/FaceSim3D/)
+[![demo](https://img.shields.io/badge/pretty-docs-violet)](https://shescher.github.io/FaceSim3D/ "Go to the project's documentation page")
 
 ## Project description
 
@@ -69,7 +69,6 @@ Additionally, some of the analysis outputs are stored in the folder `results/`.
 
 To reproduce the analysis, the data should be stored in the `data/` folder.
 
-
 ## Citation
 
 If you use this code or data, please cite the following paper
@@ -89,24 +88,23 @@ If you use this code or data, please cite the following paper
 
 `literature/` comprises `*.bib` file(s) that contain relevant literature, e.g., as listed in the FaceSim3D publication.
 
-
 ## Contributors/Collaborators
 
 [Simon M. Hofmann*](https://bsky.app/profile/smnhfmnn.bsky.social "Follow on Bluesky"),
-[Anthony Ciston](https://github.com/anfrimov),
-[Abhay Koushik](https://www.abhaykoushik.com),
+[Anthony Ciston](https://github.com/anfrimov "On GitHub"),
+[Abhay Koushik](https://www.abhaykoushik.com "Personal webpage"),
 [Felix Klotzsche](https://bsky.app/profile/flxklotz.bsky.social "Follow on Bluesky"),
-[Martin N. Hebart](http://martin-hebart.de),
-[Klaus-Robert Müller](https://web.ml.tu-berlin.de/author/prof.-dr.-klaus-robert-muller/),
-[Arno Villringer](https://www.cbs.mpg.de/employees/villringer),
-[Nico Scherf](https://scholar.google.de/citations?user=mRKOyBIAAAAJ&hl=de),
-[Anna Hilsmann](https://iphome.hhi.de/hilsmann/index.htm),
-[Vadim V. Nikulin](https://www.cbs.mpg.de/employees/nikulin),
-[Michael Gaebler](https://www.michaelgaebler.com)
+[Martin N. Hebart](http://martin-hebart.de "Personal webpage"),
+[Klaus-Robert Müller](https://web.ml.tu-berlin.de/author/prof.-dr.-klaus-robert-muller/ "Institute's webpage"),
+[Arno Villringer](https://www.cbs.mpg.de/employees/villringer "Institute's webpage"),
+[Nico Scherf](https://scholar.google.de/citations?user=mRKOyBIAAAAJ&hl=de "On Google Scholar"),
+[Anna Hilsmann](https://iphome.hhi.de/hilsmann/index.htm "Institute's webpage"),
+[Vadim V. Nikulin](https://www.cbs.mpg.de/employees/nikulin "Institute's webpage"),
+[Michael Gaebler](https://www.michaelgaebler.com "Personal webpage")
 
-This study was conducted at the [Max Planck Institute for Human Cognitive and Brain Sciences](https://www.cbs.mpg.de)
+This study was conducted at the [Max Planck Institute for Human Cognitive and Brain Sciences](https://www.cbs.mpg.de/en "Go the institute website")
 as part of the [NEUROHUM project](https://neurohum.cbs.mpg.de "Go the project site").
 
-![NEUROHUM Logo](https://neurohum.cbs.mpg.de/assets/institutes/headers/cbsneurohum-desktop-en-cc55f3158c5428ca969719e99df1c4f636a0662c1c42e409d476328092106060.svg)
+[![NEUROHUM Logo](https://neurohum.cbs.mpg.de/assets/institutes/headers/cbsneurohum-desktop-en-cc55f3158c5428ca969719e99df1c4f636a0662c1c42e409d476328092106060.svg)](https://neurohum.cbs.mpg.de "Go the project site")
 
 *\* corresponding author*

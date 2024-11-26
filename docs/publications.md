@@ -6,4 +6,4 @@ and are currently under review.
 
 Results on the **pilot study** were presented
 
-at [CCN 2022 (San Francisco)](https://2022.ccneuro.org/index.php "Go to the conference website"): [@Hofmann2022].
+at [CCN 2022 (San Francisco)](https://2022.ccneuro.org "Go to the conference website"): [@Hofmann2022].
