@@ -22,7 +22,7 @@ Human judgments of face similarity from the triplet odd-one-out task.
 #### `VGG-Face` activation maps
 
 Face images both in original and 3D-reconstructed form are fed into a pre-trained `VGG-Face` network.
-The resulting activation maps (of all layers) were used to compute the similarity matrices.
+The resulting activation maps (of all layers) were used to compute similarity matrices.
 
 #### Cognitive models
 
@@ -31,15 +31,16 @@ To this end, sparse and deep encoding models were used to predict human similari
 
 ##### Human-aligned `VGG-Face` activation maps
 
-An adaptation of the deep neural network **VGG-Face** was aligned to human choices in the face similarity task.
+An adaptation of the deep neural network **VGG-Face** was aligned to human choices in the face similarity judgment task.
 Also, for this embedding model, similarity matrices were computed based on feature maps of the model.
 
 ##### Sparse embedding models: SPoSE & VICE
 
-These models were developed for modeling human similarity judgments in similarity tasks.
-See [Hebart et al. (2020)](https://www.nature.com/articles/s41562-020-00951-3),
+Sparse models were developed for modeling human similarity judgments in similarity tasks,
+see [Hebart et al. (2020)](https://www.nature.com/articles/s41562-020-00951-3),
 and [Muttenthaler el al. (2022)](https://hdl.handle.net/21.11116/0000-000B-2A07-F) for
 details.
+We used the SPoSE and VICE models to predict human similarity judgments and computed similarity matrices based on the model's predictions.
 
 #### Physical face features
 
