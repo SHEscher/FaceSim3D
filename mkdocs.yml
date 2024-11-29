@@ -23,7 +23,7 @@ nav: # Files are relative to docs/
     -   Results:
             -   Results overview: results.md
             -   Notebooks: notebooks/
-    -   Research Code:
+    -   Code:
             -   Code overview: code.md
             -   Analysis package: package.md
             -   API reference: reference/
