@@ -60,7 +60,7 @@ dependencies = [
 # The following can be co-installed with `pip install -e .[develop]`
 develop = [
     "bumpver==2024.1130",
-    "ruff==0.8.0",
+    "ruff==0.8.1",
     "pre-commit==4.0.1",
     "pytest==8.3.3",
     "pytest-cov==6.0.0",
