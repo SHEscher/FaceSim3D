@@ -1,6 +1,6 @@
 --8<-- "experiment/README.md:0:13"
 
-![Odd-one-out Trials](assets/videos/Experiment.mp4 "Trials in the triplet odd-one-out task 3D")
+![type:video](./assets/videos/experiment.mp4 "Trials in the triplet odd-one-out task 3D")
 
 --8<-- "experiment/README.md:16:24"
 

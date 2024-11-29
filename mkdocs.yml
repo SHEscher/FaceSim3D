@@ -110,6 +110,15 @@ markdown_extensions:
 # Sets the plugins to use in the site.
 plugins:
     - search
+    -   mkdocs-video:  # https://github.com/soulless-viewer/mkdocs-video
+            is_video: True
+            video_type: mp4
+            video_autoplay: True
+            video_loop: True
+            video_muted: True
+            video_controls: False
+            css_style:
+                width: "100%"
     - markdown-exec
     -   gen-files:
             scripts:
