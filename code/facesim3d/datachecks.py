@@ -1171,10 +1171,7 @@ def estimate_remaining_costs(in_euro: bool, verbose: bool = False) -> pd.DataFra
     # Compute expected total remaining costs
     total_expected_costs_triplets = mean_cost_per_ppid * total_expected_n_ppid_triplets
     total_expected_costs_trials = mean_cost_per_ppid * total_expected_n_ppid_trials
-    print(
-        f"Total expected costs (based on triplets) ({'€' if in_euro else '£'}): "
-        f"{total_expected_costs_triplets:.2f}"
-    )
+    print(f"Total expected costs (based on triplets) ({'€' if in_euro else '£'}): {total_expected_costs_triplets:.2f}")
     for sess in params.SESSIONS:
         session_df.loc[sess, "total_expected_costs_triplets"] = (
             session_df.loc[sess, "total_expected_n_ppid_triplets"] * session_df.loc[sess, "mean_costs_per_ppid"]
