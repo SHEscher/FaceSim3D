@@ -55,6 +55,23 @@ def cfd_var_converter(var_id_or_label: str) -> pd.DataFrame:
     return var_return
 
 
+def cfd_var_description(var_id_or_label: str) -> pd.DataFrame:
+    """Get the description for a `CFD` variable ID or label name."""
+    cfd_code_tab = get_cfd_code_table()
+
+    if var_id_or_label[1].isnumeric():
+        # ID -> description
+        var_return = cfd_code_tab.Description[cfd_code_tab.VarID.str.contains(var_id_or_label, case=False)].item()
+    else:
+        # label name -> description
+        var_return = cfd_code_tab.Description[cfd_code_tab.VarLabel.str.match(var_id_or_label, case=False)]
+
+        if len(var_return) > 1:
+            print("Note, there are various descriptions with that label name:", var_return.to_list())
+
+    return var_return
+
+
 def get_cfd_features(
     set_name: str = "main", drop_nan_col: bool = True, physical_attr_only: bool = True
 ) -> pd.DataFrame:
