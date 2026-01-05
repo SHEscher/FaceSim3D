@@ -751,7 +751,7 @@ if __name__ == "__main__":
             # tr_val_ctn_table = tr_table_dict_sub[sess][  # noqa: ERA001, RUF100
             #     ["triplet_id", "triplet"]].value_counts().rename_axis(
             #     ["triplet_id", "triplet"]).reset_index(name='counts')
-            # tr_tab_multi_sample = tr_table_dict_sub[sess][tr_table_dict_sub[sess].triplet.isin(  # noqa: E501, ERA0, RUF100
+            # tr_tab_multi_sample = tr_table_dict_sub[sess][tr_table_dict_sub[sess].triplet.isin(  # noqa: E501, RUF100
             #     tr_val_ctn_table[tr_val_ctn_table.counts >= MIN_N_SAMPLES_PER_TRIPLET].triplet)]
             # <- not necessary for multi-sub-sample here
 

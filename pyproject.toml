@@ -60,7 +60,7 @@ dependencies = [
 # The following can be co-installed with `pip install -e .[develop]`
 develop = [
     "bumpver==2024.1130",
-    "ruff==0.9.3",
+    "ruff==0.14.10",
     "pre-commit==4.1.0",
     "pytest==8.3.4",
     "pytest-cov==6.0.0",
@@ -231,14 +231,15 @@ lint.ignore = [
     "ANN401", # flake8-annotations: Any
     "COM812", # Trailing comma missing
     "D203",   # 1 blank line required before class docstring: incompatible with D211 (=no blank line required)
-    "D212",   # multi-line-summary-first-line incompatible with D213 (=should start at second line)
+    "D212",   # multi-line-summary-first-line incompatible with D213 (=should start at the second line)
     "DTZ005", # timezone-naive datetime
     "E402",   # Module level import not at the top of a file (covert by ISORT)
     # "E501", # Ignore line-length since 119 is used
     # "ERA001", # Found commented-out code
     "ISC001",  # single-line-implicit-string-concatenation [toogle if you use `ruff format`]
     "NPY002", # Replace legacy `np.random.randn` call with `np.random.Generator`
-    "PLC0206", # Extracting value from dictionary without calling `.items()`
+    "PLC0206", # Extracting value from a dictionary without calling `.items()`
+    "PTH208", # Use `pathlib.Path.iterdir()`
     "S301",   # suspicious-pickle-usage
     "TD002",  # Missing author in To-Do
     "TD003",  # Missing issue link on the line following a To-Do

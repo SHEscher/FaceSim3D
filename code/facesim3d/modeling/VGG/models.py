@@ -692,7 +692,7 @@ class VGGFaceHumanjudgmentBase(nn.Module, ABC):
             return self._layer_names
 
         for child in self.children():
-            if isinstance(child, (VGGFace, VGGcore)):  # noqa: UP038
+            if isinstance(child, (VGGFace, VGGcore)):
                 self._layer_names.extend(child.layer_names)
             else:
                 for layer in child:

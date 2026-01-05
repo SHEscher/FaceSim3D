@@ -250,7 +250,7 @@ def extract_vice_params_from_path(path_to_model_dir: str) -> pd.Series:
         msg = "More than one gender found in the path"
         raise ValueError(msg)
     if gender:  # e.g., ["male"]
-        import warnings
+        import warnings  # noqa: PLC0415
 
         warnings.warn(
             message="If gender should be kept, a different implementation is required",

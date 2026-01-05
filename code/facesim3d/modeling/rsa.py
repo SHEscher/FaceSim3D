@@ -824,7 +824,7 @@ def compute_similarity_matrix_from_vgg_face_human_judgment_model(
         trial_results_table = pd.read_csv(p2_model_decisions)
 
     else:
-        import torch
+        import torch  # noqa: PLC0415
 
         # Get model
         vgg_hj_model = load_trained_vgg_face_human_judgment_model(
