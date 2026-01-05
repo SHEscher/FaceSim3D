@@ -23,7 +23,7 @@ jobs:
             wget https://github.com/jgm/pandoc/releases/download/2.11.4/pandoc-2.11.4-1-amd64.deb
             sudo dpkg -i pandoc-2.11.4-1-amd64.deb
       # - name: Install Pandoc Citeproc
-      #   run: sudo apt-get install -y pandoc-citeproc
+      #   run: sudo apt-get install -y pandoc-citeproc [CMD NOT WORKING ANYMORE, but not necessary]
       - uses: actions/cache@v3
         with:
           key: mkdocs-material-${{ env.cache_id }}
