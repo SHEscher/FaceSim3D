@@ -20,7 +20,7 @@ to investigate the latent representations that underlie their predictions.
 
 ### Research code `facesim3d` as Python package
 
-The code for data quality control, preprocessing, modeling and further analysis
+The code for data quality control, preprocessing, modeling, and further analysis
 is available as the Python package `facesim3d`.
 The package has been implemented in `Python 3.10.4` (no other versions have been tested).
 
