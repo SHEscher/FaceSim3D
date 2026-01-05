@@ -1,6 +1,6 @@
 [project]
 name = "FaceSim3D"
-version = "1.0.1"
+version = "1.0.2"
 description = "Testing the effect of dynamic 3D viewing conditions on face similarity perception."
 readme = "README.md"
 requires-python = ">=3.10, <3.11"
@@ -321,7 +321,7 @@ max-nested-blocks = 5 # default: 5
 
 # For instance, run in shell: bumpver update --patch --no-fetch --dry
 [tool.bumpver]
-current_version = "1.0.1"
+current_version = "1.0.2"
 version_pattern = "MAJOR.MINOR.PATCH"
 pre_commit_hook = "scripts/badge.sh"
 commit_message = "bump version {old_version} -> {new_version}"
