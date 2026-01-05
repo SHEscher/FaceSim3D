@@ -72,15 +72,15 @@ To reproduce the analysis, the data should be stored in the `data/` folder.
 ## Citation
 
 If you use this code or data, please cite the following paper
-([Hofmann et al. Human-aligned deep and sparse encoding models of dynamic 3D face similarity perception. *PsyArXiv*. 2024](https://doi.org/10.31234/osf.io/f62pw)):
+([Hofmann et al. Dynamic presentation in 3D modulates face similarity judgments. *PsyArXiv*. 2025](https://doi.org/10.31234/osf.io/f62pw)):
 
 ```bibtex
-@article{hofmannHumanalignedDeepSparse2024,
-    title={Human-aligned deep and sparse encoding models of dynamic {3D} face similarity perception},
-    author={Hofmann, Simon M. and Ciston, Anthony and Koushik Abhay and Klotzsche, Felix and Hebart, Martin N. and Müller, Klaus-Robert and Villringer, Arno and Scherf, Nico and Hilsmann, Anna and Nikulin, Vadim V. and Gaebler, Michael},
-    journal={PsyArXiv},
-    doi={10.31234/osf.io/f62pw},
-    year={2024},
+@article{hofmannDynamicPresentation3D2025,
+  title = {Dynamic presentation in {{3D}} modulates face similarity judgments -- {{A}} human-aligned encoding model approach},
+  author = {Hofmann, Simon M. and Ciston, Anthony Buck and Koushik, Abhay and Klotzsche, Felix and Hebart, Martin N. and M\"uller, Klaus-Robert and Villringer, Arno and Scherf, Nico and Hilsmann, Anna and Nikulin, Vadim V. and Gaebler, Michael},
+  journal = {PsyArXiv},
+  doi = {10.31234/osf.io/f62pw},
+  year = {2025},
 }
 ```
 
