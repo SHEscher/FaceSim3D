@@ -1,10 +1,10 @@
 # FaceSim3D – **code**
 
-| Period                |    Status    |                                                                                 Author |
-|-----------------------|:------------:|---------------------------------------------------------------------------------------:|
-| Feb, 2022 - Sep, 2024 | `in process` |  [Simon M. Hofmann](https://bsky.app/profile/smnhfmnn.bsky.social "Follow on Bluesky") |
+| Period                |   Status    |                                                                                 Author |
+|-----------------------|:-----------:|---------------------------------------------------------------------------------------:|
+| Feb, 2022 - Mar, 2026 | `finalized` |  [Simon M. Hofmann](https://bsky.app/profile/smnhfmnn.bsky.social "Follow on Bluesky") |
 
-![Last update](https://img.shields.io/badge/last_update-Nov_26,_2024-green "Partial paradigm")
+![Last update](https://img.shields.io/badge/last_update-Mar_23,_2026-green "Partial paradigm")
 
 ***
 
@@ -61,14 +61,6 @@ These dimensions have been used to compute further similarity matrices.
 
 The analysis code can be installed as a Python package `facesim3d`.
 Check how to install it in the main [README](../README.md#research-code-facesim3d-as-python-package).
-
-### Testing
-
-```shell
-pytest \              # (standard run through the tests)
-  --cov \             # (check how much (%) of the code is tested already)
-  --cov-report=html   # (to explore which parts of the code are not tested yet)
-```
 
 ## COPYRIGHT/LICENSE
 

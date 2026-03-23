@@ -27,7 +27,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
 ]
-# Install the project code as Python module with `pip install -e .` or `pip install -e ".[develop,...]"`
+# Install the project code as a Python package with `pip install -e .` or `pip install -e ".[develop,...]"`
 dependencies = [
     "boto3==1.28.53",
     "ipykernel==6.29.5",
@@ -59,11 +59,11 @@ dependencies = [
 [project.optional-dependencies]
 # The following can be co-installed with `pip install -e .[develop]`
 develop = [
-    "bumpver==2024.1130",
-    "ruff==0.14.10",
-    "pre-commit==4.1.0",
-    "pytest==8.3.4",
-    "pytest-cov==6.0.0",
+    "bumpver==2025.1131",
+    "ruff==0.15.7",
+    "pre-commit==4.5.1",
+    "pytest==9.0.2",
+    "pytest-cov==7.1.0",
 ]
 
 # Install with `pip install -e .[spose]`

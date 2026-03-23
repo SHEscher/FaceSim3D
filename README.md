@@ -2,7 +2,7 @@
 
 *Testing the effect of dynamic 3D viewing conditions on face similarity perception*
 
-![Last update](https://img.shields.io/badge/last_update-Jan_05,_2026-green)
+![Last update](https://img.shields.io/badge/last_update-Mar_23,_2026-green)
 ![version](https://img.shields.io/badge/version-v.1.0.2-blue)
 [![demo](https://img.shields.io/badge/pretty-docs-violet)](https://shescher.github.io/FaceSim3D/ "Go to the project's documentation page")
 
@@ -71,16 +71,26 @@ To reproduce the analysis, the data should be stored in the `data/` folder.
 
 ## Citation
 
-If you use this code or data, please cite the following paper
-([Hofmann et al. Dynamic presentation in 3D modulates face similarity judgments. *PsyArXiv*. 2025](https://doi.org/10.31234/osf.io/f62pw)):
+If you use this code or data, please cite the following paper: **Hofmann et al. Dynamic presentation in 3D modulates face similarity judgments. *ROSS*. 2026**:
 
 ```bibtex
-@article{hofmannDynamicPresentation3D2025,
+@article{hofmannDynamicPresentation3D2026,
+  title = {Dynamic presentation in {{3D}} modulates face similarity judgments -- {{A}} human-aligned encoding model approach},
+  author = {Hofmann, Simon M. and Ciston, Anthony Buck and Koushik, Abhay and Klotzsche, Felix and Hebart, Martin N. and M\"uller, Klaus-Robert and Villringer, Arno and Scherf, Nico and Hilsmann, Anna and Nikulin, Vadim V. and Gaebler, Michael},
+  journal = {Royal Society Open Science},
+  year = {2026},
+}
+```
+
+See also the corresponding preprint [Hofmann et al. Dynamic presentation in 3D modulates face similarity judgments. *PsyArXiv*. 2024](https://doi.org/10.31234/osf.io/f62pw):
+
+```bibtex
+@article{hofmannDynamicPresentation3D2024,
   title = {Dynamic presentation in {{3D}} modulates face similarity judgments -- {{A}} human-aligned encoding model approach},
   author = {Hofmann, Simon M. and Ciston, Anthony Buck and Koushik, Abhay and Klotzsche, Felix and Hebart, Martin N. and M\"uller, Klaus-Robert and Villringer, Arno and Scherf, Nico and Hilsmann, Anna and Nikulin, Vadim V. and Gaebler, Michael},
   journal = {PsyArXiv},
   doi = {10.31234/osf.io/f62pw},
-  year = {2025},
+  year = {2024},
 }
 ```
 

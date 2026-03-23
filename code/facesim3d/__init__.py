@@ -2,7 +2,7 @@
 
 __author__ = "Simon M. Hofmann"
 __version__ = "1.0.2"
-__year__ = "2022-2024"
+__year__ = "2022-2026"
 
 import warnings
 

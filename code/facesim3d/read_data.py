@@ -389,7 +389,7 @@ def create_all_triple_combinations(n_faces: int) -> pd.DataFrame:
 
 def set_infix(set_nr: str) -> str:
     """Generate the Set infix (e.g., 's004' OR 's011') from a set number."""
-    return f"s{int(set_nr.split('.')[-1]):03d}"
+    return f"s{int(set_nr.split('.', maxsplit=1)[-1]):03d}"
 
 
 def get_triplet_ids_and_heads(pilot: bool = params.PILOT) -> pd.DataFrame:
@@ -1283,7 +1283,10 @@ def read_trial_results_of_set(set_nr: str, clean_trials: bool = True, verbose: b
     prolific_set_ppids = read_prolific_participant_data(set_nr=set_nr)["Participant id"]
 
     th_multi_sub_sample: int = 20
-    if not set(tr_table.ppid).issubset(set(prolific_set_ppids)) and int(set_nr.split(".")[-1]) < th_multi_sub_sample:
+    if (
+        not set(tr_table.ppid).issubset(set(prolific_set_ppids))
+        and int(set_nr.rsplit(".", maxsplit=1)[-1]) < th_multi_sub_sample
+    ):
         # Ignore Sets of multi-sub-sample
         if verbose:
             cprint(

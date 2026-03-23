@@ -1,6 +1,6 @@
 # Settings for the MkDocs documentation site generator.
 site_name: FaceSim3D  # Sets the name of the site.
-site_description: Run and analyse the FaceSim3D study (2022-2024).  # Sets the description of the site.
+site_description: Run and analyse the FaceSim3D study (2022-2026).  # Sets the description of the site.
 site_url: "https://shescher.github.io/FaceSim3D/" # specifies the base URL for the site.
 repo_url: "https://github.com/SHEscher/FaceSim3D" # specifies the URL of the Git repo where the source code for the site is hosted. This is used to generate links to the repo
 repo_name: "SHEscher/FaceSim3D"  # specifies the name of the repo where the source code for the documentation site is hosted.
@@ -107,7 +107,7 @@ markdown_extensions:
     -   toc: # Adds a table of contents to your Markdown documents, with permalinks to each section.
             permalink: "🗿"  # "✢"
 
-# Sets the plugins to use in the site.
+# Sets the plugins to use on the site.
 plugins:
     - search
     -   mkdocs-video:  # https://github.com/soulless-viewer/mkdocs-video
@@ -149,7 +149,7 @@ plugins:
                     - hide_output
             # theme: dark # overwrites the theme setting for notebooks
             # highlight_extra_classes: custom-css-classes
-            # include_source: True # include the notebook source as download button
+            # include_source: True # include the notebook source as a download button
     -   mkdocstrings:
             handlers:
                 python:
