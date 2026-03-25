@@ -12,6 +12,4 @@
 
 [:octicons-codespaces-24:{ .code }](code.md "Go to Research Code") : The research code is available as a Python package. For its setup and API reference, see the section [Research Code](code.md "Go to Research Code").
 
---8<-- "README.md:72:85"
-
---8<-- "README.md:91:112"
+--8<-- "README.md:72:121"
