@@ -300,7 +300,7 @@ def main_index_to_model_name(face_idx: int) -> str:
     Convert the main study index as it appears, e.g., in the similarity matrix to the name of the corresponding head
     model (as it appears in the `CFD` feature table (`PFA`)).
 
-    :param face_idx: head index in pilot
+    :param face_idx: head index in the pilot
     :return: name of the head model
     """
     if face_idx not in range(100):
@@ -425,8 +425,8 @@ def display_face(
     :param data_mode: path to the "2d-original", "3d-reconstructions", or "3d-perspectives"
     :param angle: viewing angle of face to display [only if data_mode == "3d-perspectives"]
     :param interactive: if True display 3D (.obj) in interactive mode.
-    :param show: if True show image
-    :param verbose: if True print the path to the image.
+    :param show: shows the image, if True
+    :param verbose: prints the path to the image, if True
     """
     data_mode = data_mode.lower()
     if data_mode == "3d-perspectives" and angle is None:
@@ -504,7 +504,7 @@ def display_set_of_faces(
         axes.flatten()[i].set_xticks([])
         axes.flatten()[i].set_xlabel(face_id)
         axes.flatten()[i].yaxis.set_visible(False)
-        for spine in axes.flatten()[i].spines.values():  # remove axes-box around image
+        for spine in axes.flatten()[i].spines.values():  # remove the axes-box around the image
             spine.set_visible(False)
         fig.tight_layout()
         plt.show()
@@ -523,7 +523,7 @@ def list_faulty_heads(run: bool = False, suffix: str = "") -> pd.DataFrame:
     :param suffix: path suffix hinting to the focus of the observation among the face stimuli (e.g., 'eyes')
     :return: the list of faulty heads (IDs)
     """
-    # Set path to faulty heads table
+    # Set the path to faulty heads table
     suffix = f"_{suffix}" if suffix else ""
     path_to_table = Path(paths.data.unity.cfd, f"faulty_heads{suffix}.csv")
 
@@ -533,7 +533,7 @@ def list_faulty_heads(run: bool = False, suffix: str = "") -> pd.DataFrame:
             df_faulty_heads = pd.read_csv(path_to_table, index_col=0)
             if not ask_true_false("Do you want to add missing heads to table?"):
                 return df_faulty_heads
-            # In case all heads shall be replaced, delete table manually
+            # In case all heads shall be replaced, delete the table manually
 
         else:
             df_faulty_heads = pd.DataFrame(columns=["head_nr", "faulty"])
@@ -597,7 +597,7 @@ if __name__ == "__main__":
         Path(paths.results.main.rdms, "Similarity (cosine) of CFD_PFF face features (90%-PCA)_rsatoolbox.png")
     ).show()  # check this out
 
-    # Upper left triangle of the similarity matrix vs. rest in females
+    # Upper left triangle of the similarity matrix vs. the rest in females
     display_set_of_faces(
         list_head_ids=list(map(main_matrix_index_to_head_nr, range(33))), data_mode="2d-original", verbose=False
     )
@@ -688,12 +688,12 @@ if __name__ == "__main__":
                 spine.set_linewidth(1)
                 spine.set_visible(True)
 
-        # Explore 3 most important features
+        # Explore the three most important features
         for j, idx_imp_feat in enumerate(indices_sorted_by_importance[:3]):
             feat_code = feat_tab.columns[idx_imp_feat]
             direction = "negative" if feature_loading_pc[idx_imp_feat] < 0 else "positive"
-            # positive: greater values in this feature means greater importance in PC
-            # negative: smaller values in this feature means greater importance in PC
+            # positive: greater values in this feature mean greater importance in PC
+            # negative: smaller values in this feature mean greater importance in PC
             print(
                 f"\tThe {j + 1}. most important {direction} feature "
                 f"({norm_abs_feature_loading_pc[idx_imp_feat]:.1%} loading) in PC{i + 1} is: "

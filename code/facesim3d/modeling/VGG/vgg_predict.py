@@ -59,7 +59,7 @@ o-O-.-O-o-.o-O-.-O-o-.o-O-.-O-o-.o-O-.-O-o-.o-O-.-O-o-.o-O-.-O-o
 
 # Set logger
 logger = logging.getLogger(__name__)  # in configs "__main__"
-# set logger name if desired: logger.name = "DESIRED_NAME"
+# set the logger name if desired: logger.name = "DESIRED_NAME"
 
 # %% Functions << o  >><< o >><< o  >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o
 
@@ -154,7 +154,7 @@ def train_vgg_face_human_judgment_model(
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
     writer = SummaryWriter(log_dir=str(Path(paths.data.models.vggbehave, p_fix, "runs", session, model_name)))
 
-    # Write input example and graph to tensorboard
+    # Write an input example and graph to tensorboard
     # writer.add_graph(model=model, input_to_model=(img1.to(device), img2.to(device), img3.to(device)),
     #                  verbose=True)
 
@@ -184,10 +184,10 @@ def train_vgg_face_human_judgment_model(
             optimizer.step()
 
             running_loss += loss.item() * x1.size(0)  # x1.size(0) == train_data.batch_size
-            # multiply by batch size to get correct loss since average is taken over batch for x-entropy
+            # multiply by batch size to get the correct loss since average is taken over batch for x-entropy
             running_corrects += torch.sum(predictions == y.data.to(device))  # OR just y
             if (i % n_print) == (n_print - 1):
-                # Save (running) loss to file / use writer
+                # Save (running) loss to file / use the writer
                 msg = (
                     f"Epoch: {epoch + 1} | Step: {i + 1:6d} | Current loss: {loss.item():.5f} | "
                     f"Running loss: {running_loss / ((i + 1) * train_data.batch_size):.5f}"
@@ -230,7 +230,7 @@ def train_vgg_face_human_judgment_model(
 
     cprint("\n" + 2 * "*****_" + " FINISHED TRAINING " + "_*****" * 3 + "\n", col="g", ts=True)
 
-    # Last evaluation of model on training and validation set
+    # Last evaluation of the model on the training and validation set
     accs = {
         "train": epoch_acc.cpu().item(),  # use last epoch's accuracy
         "val": evaluate_vgg_face_human_judgment_model(
@@ -245,7 +245,7 @@ def train_vgg_face_human_judgment_model(
         cprint(string=msg, col="g", fm="bo")
         logger.info(msg)
 
-    # Save final model
+    # Save the final model
     if accs["val"] >= best_acc:
         msg = f"Final model has the best val accuracy ({accs['val']:.1%}) and is saved to '{save_path}'"
         torch.save(model.state_dict(), save_path)
@@ -261,7 +261,7 @@ def train_vgg_face_human_judgment_model(
     cprint(string=msg, col="b", ts=True)
     logger.info(msg)
 
-    # Save model hyperparameters to table
+    # Save model hyperparameters to a table
     hp_tab = get_vgg_performance_table(hp_search=False, exclusive_gender_trials=exclusive_gender_trials)
 
     n_heads = len(np.unique(train_data.dataset.dataset.session_data.to_numpy().flatten()))
@@ -288,7 +288,7 @@ def train_vgg_face_human_judgment_model(
         accs["test"],
     ]
     # Convert columns to correct types
-    hp_tab.time_taken = hp_tab.time_taken.astype(str)  # writer (below) cannot handle timedelta64
+    hp_tab.time_taken = hp_tab.time_taken.astype(str)  # the writer (below) cannot handle timedelta64
     acc_cols = [c for c in hp_tab.columns if "_acc" in c]
     col_convert = ["bs", "epochs", "seed", "n_train", "n_val"]
     hp_tab[col_convert] = hp_tab[col_convert].astype(int)
@@ -349,7 +349,7 @@ def main():
         if device.startswith("cuda"):
             torch.cuda.manual_seed(FLAGS.seed)
             torch.cuda.manual_seed_all(FLAGS.seed)
-            torch.backends.cudnn.benchmark = True  # look for optimal algorithms for given train config
+            torch.backends.cudnn.benchmark = True  # look for optimal algorithms for the given train config
         logger.info("Set seed to %s.", FLAGS.seed)
 
     # Init model

@@ -127,9 +127,6 @@ plugins:
             nav_file: SUMMARY.txt  # README.md
             implicit_index: true
     - autorefs
-    # -   coverage:
-    #         page_path: coverage  # default [former `page_name` is deprecated]
-    #         html_report_dir: code/tests/coverage_html_report # default htmlcov
     -   mkdocs-jupyter: # https://github.com/danielfrg/mkdocs-jupyter
             # ignore_h1_titles: true # false: take title and show in navigator, true: take file name instead
             ignore: [ ".ipynb_checkpoints/*.ipynb", ".virtual_documents/*ipynb" ]
@@ -182,7 +179,7 @@ plugins:
         #                'old/file.md': 'new/file.md'
         #                'some_file.md': 'http://external.url.com/foobar'
     -   bibtex: # https://github.com/shyamd/mkdocs-bibtex/
-            bib_file: literature/facesim3d.bib  # path or url to single *.bib file. Path can be absolute or relative to mkdocs.yml.
+            bib_file: literature/facesim3d.bib  # path or url to a single *.bib file. Path can be absolute or relative to mkdocs.yml.
             bib_dir: literature  # dir for *.bib files to load, same as above for path resolution
             csl_file: https://raw.githubusercontent.com/citation-style-language/styles/master/apa-eu.csl
             cite_inline: true

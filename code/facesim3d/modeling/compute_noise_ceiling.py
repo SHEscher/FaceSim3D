@@ -40,7 +40,7 @@ CHECK_MORE_SAMPLES: bool = False  # check for more samples per triplet
 N_REPS: int = 200  # 1_000  # repetitions for noise ceiling computation
 PLOTTING: bool = True  # plot results
 
-# Set correlation function
+# Set the correlation function
 CORR_FUNC = spearmanr if SPEARMAN else pearsonr
 CORR_NAME = CORR_FUNC.__name__[:-1].title()  # "Spearman" OR "Pearson"
 
@@ -159,7 +159,7 @@ def compute_maximal_empirical_accuracy_in_session(
     # Get MEA table
     mea_df = get_mea_table()
 
-    # Get value counts of triplets in table
+    # Get value counts of triplets in the table
     tr_val_ctn_table = (
         tr_table_of_session[["triplet_id", "triplet"]]
         .value_counts()
@@ -219,7 +219,7 @@ def statistical_difference_maximal_empirical_accuracy_between_sessions(
     for sess in params.SESSIONS:
         tr_table_of_session = {"2D": tr_table_of_2d, "3D": tr_table_of_3d}[sess]
 
-        # Get value counts of triplets in table
+        # Get value counts of triplets in the table
         tr_val_ctn_table = (
             tr_table_of_session[["triplet_id", "triplet"]]
             .value_counts()
@@ -245,7 +245,7 @@ def statistical_difference_maximal_empirical_accuracy_between_sessions(
         poss_accs_dict[sess] = poss_accs
         len_trips_dict[sess] = len_trips
 
-    # Run significance test:
+    # Run a significance test:
     is_normal_dist = True  # init
     for sess in params.SESSIONS:
         # Test for normal distribution
@@ -348,7 +348,7 @@ def compute_cross_session_accuracy(
         )
     choice_table.index.name = "triplet_id"
 
-    # Fill choice table via a majority vote per triplet-ID
+    # Fill the choice table via a majority vote per triplet-ID
     new_entries = False
 
     for tid in tqdm(
@@ -376,7 +376,7 @@ def compute_cross_session_accuracy(
         if len(tid_tab_2d_vc) > 1 or len(tid_tab_3d_vc) > 1:
             # At least two heads were chosen n times
 
-            # Fill choice table with choices
+            # Fill the choice table with choices
             choice_table.loc[tid, "head_odd_2D"] = sorted(tid_tab_2d_vc.index.astype(int).tolist())
             choice_table.loc[tid, "head_odd_3D"] = sorted(tid_tab_3d_vc.index.astype(int).tolist())
 
@@ -386,7 +386,7 @@ def compute_cross_session_accuracy(
                 continue
 
             if len(choice_table.loc[tid, "head_odd_2D"]) == len(choice_table.loc[tid, "head_odd_3D"]):
-                # Case 2: In both conditions we have the same number of most chosen heads, but the heads are not equal
+                # Case 2: In both conditions we have the same number of most chosen heads, but the heads are not equal.
                 # We randomly draw from the most selected heads & compare them
                 choice_table.loc[tid, "match"] = np.random.choice(tid_tab_2d_vc.index) == np.random.choice(
                     tid_tab_3d_vc.index
@@ -405,7 +405,7 @@ def compute_cross_session_accuracy(
                 choice_table.loc[tid, "head_odd_2D"] == choice_table.loc[tid, "head_odd_3D"]
             )
 
-    # Save choice table if there are new entries
+    # Save the choice table if there are new entries
     if new_entries:
         print("There are new entries in the choice_table which will be saved")
         path_to_choice_table.parent.mkdir(parents=True, exist_ok=True)
@@ -462,7 +462,7 @@ def get_trial_tables(multi_sub_sample_only: bool = True) -> dict:
             trial_table_dict[session] = read_trial_results_of_session(
                 session=session,
                 clean_trials=True,
-                drop_subsamples=True,  # here we remove the additionally acquired sub-sample from the data
+                drop_subsamples=True,  # here we remove the additionally acquired subsample from the data
                 verbose=False,
             )
 
@@ -531,7 +531,7 @@ if __name__ == "__main__":
         tr_table_of_3d=tr_table_dict_sub["3D"],
     )
 
-    # Compute accuracy, when data of one session is predicted by the data of the other session
+    # Compute accuracy when data of one session is predicted by the data of the other session
     compute_cross_session_accuracy(
         trial_results_table_2d=tr_table_dict_sub["2D"],
         trial_results_table_3d=tr_table_dict_sub["3D"],
@@ -583,7 +583,7 @@ if __name__ == "__main__":
     # 0.1) Correlate on full sample between 2D & 3D first
     # To be more accurate, the number of samples in each unique triplet should be the same,
     # otherwise triplets with many samples can skew the similarity values of face-pairs.
-    # Therefore, sample `max_n_samples` (see below), and repeat this `N_REPS`-times.
+    # Therefore, sample `max_n_samples` (see below) and repeat this `N_REPS`-times.
 
     # R-coefficient table
     expected_r_df = get_mer_table()
@@ -670,7 +670,7 @@ if __name__ == "__main__":
         max_n_samples_3d = tr_table_dict_sub["3D"].triplet.value_counts()[-1]  # ... don't sample more
         max_n_samples = min(max_n_samples_2d, max_n_samples_3d)
         if max_n_samples_2d != max_n_samples_3d:
-            # Sampling is only necessary if minimum number of samples per triplet differs between sessions
+            # Sampling is only necessary if the minimum number of samples per triplet differs between sessions
             for _ in tqdm(
                 range(N_REPS), desc=f"Compute {CORR_NAME} R between sessions (2D~3D) for multi-sub-sample (Option 0)"
             ):
@@ -755,7 +755,7 @@ if __name__ == "__main__":
             #     tr_val_ctn_table[tr_val_ctn_table.counts >= MIN_N_SAMPLES_PER_TRIPLET].triplet)]
             # <- not necessary for multi-sub-sample here
 
-            # Option 1: Take from each triplet only 1 & compute R within session, do this N_REPS times
+            # Option 1: Take from each triplet only 1 & compute R within a session, do this N_REPS times
             list_of_r: list = []
             list_of_cos: list = []
             p_max: float = 0.0
@@ -810,7 +810,7 @@ if __name__ == "__main__":
             # cprint(f"\n{sess} multi-sub-sample cosine similarity:", fm="ul")  # noqa: ERA001
             # print(pd.Series(list_of_cos).describe())  # noqa: ERA001
 
-            # Fill in R-table
+            # Fill in R table
             expected_r_df.loc[(sess, "multi-sub-sample_opt1"), :] = (*get_r_stats(list_of_r), p_max, np.nan)
 
             if PLOTTING:
@@ -828,7 +828,7 @@ if __name__ == "__main__":
                     linestyles=":",
                 )
 
-            # Option 2: Split triplets in half, compute R between halves within session, do N_REPS times
+            # Option 2: Split triplets in half, compute R between halves within a session, do N_REPS times
             list_of_r: list = []
             list_of_cos: list = []
             p_max: float = 0.0
@@ -838,7 +838,7 @@ if __name__ == "__main__":
                 # tr_sample_1 = tr_tab_multi_sample.sample(len(tr_tab_multi_sample) // 2, replace=False)  # noqa: E501, ERA001
                 # tr_sample_2 = tr_tab_multi_sample[~tr_tab_multi_sample.index.isin(tr_sample_1.index)] # noqa: ERA001
 
-                # Split triplets in half but each triplet should occur in both samples
+                # Split triplets in half, but each triplet should occur in both samples
                 tr_sample_1 = tr_tab_multi_sample.groupby("triplet").sample(max_n_samples)
                 tr_sample_2 = (
                     tr_tab_multi_sample[  # exclude samples from tr_sample_1
@@ -988,7 +988,7 @@ if __name__ == "__main__":
         # cprint(f"\n{sess} multi-sub-sample cosine similarity:", fm="ul")  # noqa: ERA001
         # print(pd.Series(list_of_cos).describe())  # noqa: ERA001
 
-        # Fill in R-table
+        # Fill in the R table
         expected_r_df.loc[("both", "multi-sub-sample_opt1"), :] = (*get_r_stats(list_of_r), p_max, max_n_samples)
 
         if PLOTTING:
@@ -1014,7 +1014,7 @@ if __name__ == "__main__":
         for _ in tqdm(
             range(N_REPS), desc=f"Compute {CORR_NAME} R between sessions (2D~3D) for multi-sub-sample (Option 2)"
         ):
-            # Split triplets in half but each triplet should occur in both samples
+            # Split triplets in half, but each triplet should occur in both samples
             tr_sample_2d = tr_table_dict_sub["2D"].groupby("triplet").sample(max_n_samples)
             tr_sample_3d = tr_table_dict_sub["3D"].groupby("triplet").sample(max_n_samples)
 
@@ -1068,7 +1068,7 @@ if __name__ == "__main__":
         # cprint(f"\n2D~3D multi-sub-sample cosine similarity (Option 2):", fm="ul")  # noqa: ERA001
         # print(pd.Series(list_of_cos).describe())  # noqa: ERA001
 
-        # Fill in R-table
+        # Fill in the R table
         expected_r_df.loc[("both", "multi-sub-sample_opt2"), :] = (*get_r_stats(list_of_r), p_max, max_n_samples)
 
         if PLOTTING:
@@ -1206,7 +1206,7 @@ if __name__ == "__main__":
             )
             print(f"Mean R of {N_REPS} repetitions (FSS~MSS): {np.mean(list_of_r):.3f}")
 
-            # Fill in table
+            # Fill in the table
             expected_r_df.loc[(sess, "downsampled-full-and-multi-sub-sample_opt1"), :] = (
                 *get_r_stats(list_of_r),
                 p_max,

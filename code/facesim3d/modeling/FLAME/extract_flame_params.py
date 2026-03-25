@@ -64,7 +64,7 @@ def get_flame_params(list_of_head_nrs: list[str | int], param: str, model: str =
     ), f"Parameter must be one of {latent_flame_code}."
 
     param_loader = load_deca_params if model == "deca" else load_flame_params  # select loader
-    param_length = param_loader("Head1")[param].shape[-1]  # get length of parameter from first head
+    param_length = param_loader("Head1")[param].shape[-1]  # get the length of the parameter from the first head
     df_param = pd.DataFrame(
         index=list_of_head_nrs, columns=[f"{param.title()[0]}{i:03d}" for i in range(param_length)]
     )
@@ -79,7 +79,7 @@ def get_flame_params(list_of_head_nrs: list[str | int], param: str, model: str =
 # %% __main__  >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o
 
 if __name__ == "__main__":
-    flame_params = load_flame_params(1)  # load FLAME params of first head "Head1"
+    flame_params = load_flame_params(1)  # load FLAME params of the first head "Head1"
     print("*o" * 5, "FLAME", "*o" * 5)
     for key in flame_params:
         print(f"\t{key}.shape:", flame_params[key].shape)

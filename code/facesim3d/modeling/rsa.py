@@ -151,7 +151,7 @@ def compute_physical_attr_similarity_matrix(
     :return: similarity matrix of physical face attributes
 
     """
-    # Get head mapping table
+    # Get the head mapping table
     head_map = heads_naming_converter_table(pilot_version=pilot_version)
     list_of_models = head_map.Model
 
@@ -160,7 +160,7 @@ def compute_physical_attr_similarity_matrix(
         gender = check_gender(gender)
         list_of_models = head_map.Model[head_map.Model.str.contains("WF" if "female" in gender else "WM")]
 
-    # Get table with physical attributes/features
+    # Get the table with physical attributes/features
     feat_tab = get_cfd_features_for_models(list_of_models=list_of_models, physical_attr_only=True)
 
     return compute_feature_similarity_matrix(feature_table=feat_tab, pca=pca, metric=metric, z_score=True)
@@ -182,11 +182,11 @@ def compute_flame_feature_similarity_matrix(
     :param param: which parameter to use (e.g., 'shape', 'exp' [expression], 'pose', ...)
     :param model: which model to use: 'deca' OR 'flame'
     :param gender: for exclusively within-gender feature comparison
-    :param pilot_version: None for main experiment,OR pilot 1, OR 2.
+    :param pilot_version: None for the main experiment, OR pilot 1, OR 2.
     :param metric: similarity metric to use (cosine, Euclidean)
     :return: similarity matrix based on shape parameters of the FLAME-fitted heads
     """
-    # Get head mapping table
+    # Get the head mapping table
     head_map = heads_naming_converter_table(pilot_version=pilot_version)
 
     # Filter for gender if requested
@@ -194,7 +194,7 @@ def compute_flame_feature_similarity_matrix(
         gender = check_gender(gender=gender)
         head_map = head_map[head_map.Model.str.contains("WF" if gender == "female" else "WM")]
 
-    # Get table with FLAME shape parameters for all heads
+    # Get the table with FLAME shape parameters for all heads
     feat_tab = get_flame_params(list_of_head_nrs=head_map.head_nr, param=param, model=model)
 
     return compute_feature_similarity_matrix(feature_table=feat_tab, pca=pca, metric=metric, z_score=True)
@@ -222,7 +222,7 @@ def compute_spose_feature_map_similarity_matrix(
         msg = "SPoSE feature maps are not available for pilot 1."
         raise ValueError(msg)
 
-    # Get head mapping table
+    # Get the head mapping table
     head_map = heads_naming_converter_table(pilot_version=pilot_version)
     list_of_models = head_map.Model
 
@@ -270,7 +270,7 @@ def compute_vice_feature_map_similarity_matrix(
         msg = "VICE feature maps are not available for pilot 1."
         raise ValueError(msg)
 
-    # Get head mapping table
+    # Get the head mapping table
     head_map = heads_naming_converter_table(pilot_version=pilot_version)
     list_of_models = head_map.Model
 
@@ -337,7 +337,7 @@ def compute_vgg_feature_map_similarity_matrix(
     :param extract_feat_maps: whether to extract feature maps from VGGFace
     :return: similarity matrix based on VGGFace feature maps
     """
-    # Get head mapping table
+    # Get the head mapping table
     head_map = heads_naming_converter_table(pilot_version=pilot_version)
 
     # Prepare gender-only features if requested
@@ -346,7 +346,7 @@ def compute_vgg_feature_map_similarity_matrix(
         gender = check_gender(gender=gender)
         gender_suffix = f"_{gender}_only"
 
-    # Set path to feature matrix
+    # Set the path to feature matrix
     data_mode = data_mode.lower()
     data_mode_suffix = "original" if "orig" in data_mode else "3D-recon" if "3d-recon" in data_mode else "3D-persp"
     p2_feat_mat = Path(
@@ -355,7 +355,7 @@ def compute_vgg_feature_map_similarity_matrix(
     )
 
     p2_feat_sim_mat = Path(str(p2_feat_mat).replace(".pd.pickle", f"_{metric}-similarity-matrix{gender_suffix}.npy"))
-    p2_feat_mat.parent.mkdir(parents=True, exist_ok=True)  # create directory if not exists
+    p2_feat_mat.parent.mkdir(parents=True, exist_ok=True)  # create the directory if not exists
 
     # Get the table with VGG-Face activations maps of all layers elicited by each head
     if (p2_feat_sim_mat.is_file() and extract_feat_maps) or not p2_feat_sim_mat.is_file():
@@ -372,7 +372,7 @@ def compute_vgg_feature_map_similarity_matrix(
 
             # Save feature table
             cprint(string="Saving feature table ...", col="b")
-            feat_tab.to_pickle(p2_feat_mat)  # save feature table as pickle (pd.DataFrame) [fast & small]
+            feat_tab.to_pickle(p2_feat_mat)  # save the feature table as pickle (pd.DataFrame) [fast & small]
 
     # Compute similarity matrix
     cprint(string=f"Computing similarity matrix for '{p2_feat_mat.name.split('.')[0]}' ...", col="b")
@@ -433,7 +433,7 @@ def compute_vgg_human_judgment_feature_map_similarity_matrix(
         exclusive_gender_trials=gender,
     )
 
-    # Get head mapping table
+    # Get the head mapping table
     head_map = heads_naming_converter_table(pilot_version=pilot_version)
 
     # Prepare gender-only features if requested
@@ -442,7 +442,7 @@ def compute_vgg_human_judgment_feature_map_similarity_matrix(
         gender = check_gender(gender=gender)
         gender_suffix = f"_{gender}_only"
 
-    # Set path to feature matrix
+    # Set the path to feature matrix
     data_mode_suffix = (
         "original"
         if "orig" in model_info.data_mode
@@ -456,7 +456,7 @@ def compute_vgg_human_judgment_feature_map_similarity_matrix(
         f"{f'PCA-{pca:.2f}_' if pca else ''}vgg_core_bridge.pd.pickle",
     )
     p2_feat_sim_mat = Path(str(p2_feat_mat).replace(".pd.pickle", f"_{metric}-similarity-matrix{gender_suffix}.npy"))
-    p2_feat_mat.parent.mkdir(parents=True, exist_ok=True)  # create directory if not exists
+    p2_feat_mat.parent.mkdir(parents=True, exist_ok=True)  # create the directory if not exists
 
     # Get the table with VGGFaceHumanjudgment[FrozenCore] activations maps of all layers elicited by each head
     if not p2_feat_sim_mat.is_file() or extract_feat_maps:
@@ -475,7 +475,7 @@ def compute_vgg_human_judgment_feature_map_similarity_matrix(
 
             # Save feature table
             cprint(string="Saving feature table ...", col="b")
-            feat_tab.to_pickle(p2_feat_mat)  # save feature table as pickle (pd.DataFrame) [fast & small]
+            feat_tab.to_pickle(p2_feat_mat)  # save the feature table as pickle (pd.DataFrame) [fast & small]
 
     # Compute similarity matrix
     cprint(string=f"Computing similarity matrix for '{p2_feat_mat.name.split('.')[0]}' ...", col="b")
@@ -526,7 +526,7 @@ def visualise_matrix(
     else:
         fig_name = kwargs.pop("fig_name", f"Similarity judgments of PID {ppid} in {session}-session")
 
-    # Compute size of the figure
+    # Compute the size of the figure
     figsize = kwargs.pop(
         "figsize",
         (
@@ -672,7 +672,7 @@ def compute_similarity_matrix_from_human_judgments(
                 # Head odd counts
                 head_odd_counts = trial_results_table[trial_results_table.triplet_id == t_id].head_odd.value_counts()
 
-                # Find head which was chosen most often
+                # Find the head which was chosen most often
                 head_odd_majority = head_odd_counts[head_odd_counts == head_odd_counts.max()].sample(1).index[0]
                 # we sample here, since there might be multiple odd heads with the same count (i.e., max)
 
@@ -812,7 +812,7 @@ def compute_similarity_matrix_from_vgg_face_human_judgment_model(
     vgg_hj_model_name = vgg_hj_perform_info.model_name
     vgg_hj_data_mode = vgg_hj_perform_info.data_mode
 
-    # Set path to decision table
+    # Set the path to the decision table
     g_sfx = "" if exclusive_gender_trials is None else f"_{exclusive_gender_trials.lower()}_only"
 
     p2_model_decisions = Path(paths.results.main.VGG, session, f"{vgg_hj_model_name}{g_sfx}_decisions").with_suffix(
@@ -853,7 +853,7 @@ def compute_similarity_matrix_from_vgg_face_human_judgment_model(
             columns=["head1", "head2", "head3", "head_odd_human_choice", "head_odd_model_choice"]
         )
 
-        # Fill table with model decisions
+        # Fill the table with model decisions
         with torch.no_grad():
             for i, model_input in tqdm(
                 enumerate(full_dataset_dl),
@@ -995,7 +995,7 @@ def aggregate_judgments_in_session(
     :param verbose: verbose or not
     :return: matrix with normalized judgments
     """
-    # Define path to cached similarity judgments matrix
+    # Define the path to cached matrix of similarity judgments
     path_to_cached_matrix = Path(
         paths.results.pilot.v2.rsa if pilot else paths.results.main.rsa,
         f"cached_{session}_similarity_judgments_matrix.npy",
@@ -1046,7 +1046,7 @@ def aggregate_judgments_in_session_by_gender(
     """
     gender = check_gender(gender=gender)
 
-    # Define path to cached similarity judgments matrix
+    # Define the path to cached matrix of similarity judgments
     path_to_cached_matrix = Path(
         paths.results.pilot.v2.rsa if pilot else paths.results.main.rsa,
         f"cached_{session}_{gender}_similarity_judgments_matrix.npy",
@@ -1086,7 +1086,7 @@ def aggregate_judgments_in_session_by_gender(
 
 def vectorize_similarity_matrix(face_sim_mat: np.ndarray) -> np.ndarray:
     """
-    Take the upper triangle of a given similarity matrix and return it as vector.
+    Take the upper triangle of a given similarity matrix and return it as a vector.
 
     ??? note "Ways to vectorize a matrix"
         ```python
@@ -1104,7 +1104,7 @@ def vectorize_similarity_matrix(face_sim_mat: np.ndarray) -> np.ndarray:
         ```
 
     :param face_sim_mat: face similarity matrix
-    :return: 1d vector of upper triangle
+    :return: 1d vector of the upper triangle
     """
     return face_sim_mat[np.triu_indices(n=face_sim_mat.shape[0], k=1)]
 
@@ -1213,7 +1213,7 @@ def plot_rsa_corr_df(corr_name: str, metric: str, corr_df: pd.DataFrame | None, 
         h.set_title(
             f"Correlation between {str(bsm_name).replace('_', ' ')} & other face features", fontdict={"size": 16}
         )
-        # Add horizontal line for max empirical R
+        # Add the horizontal line for max empirical R
         h.axhline(y=mer, color="r", linestyle="--", alpha=0.5)  # , label="Max empirical R"
         plt.tight_layout()
 
@@ -1306,7 +1306,7 @@ def main() -> None:
     This script computes the correlation between the similarity judgments of the 2D and 3D sessions.
     Moreover, it runs RSA on different similarity matrices and creates plots.
     """
-    # Set correlation function name
+    # Set the correlation function name
     corr_name = "Spearman" if FLAGS.spearman else "Pearson"  # OR: corr_func.__name__[:-1].title()
 
     # Set logger
@@ -1596,7 +1596,7 @@ def main() -> None:
                 )
             )
 
-    # %% Run through all physical & computational face features, and compute their correlations with BSMs and plot them
+    # %% Run through all physical & computational face features and compute their correlations with BSMs and plot them
     for feature, feat_vals in feature_dict.items():
         cprint(string=f"\n{feature}", col="b", fm="ul")
         gender_feat: bool = "_only" in feature
@@ -1758,7 +1758,7 @@ def main() -> None:
                     rsa_corr_df.loc[f"{session}_BSM_{gender}", f"{FLAGS.pca_fraction:.0%}-PCA-{feature}_r"] = r
                     rsa_corr_df.loc[f"{session}_BSM_{gender}", f"{FLAGS.pca_fraction:.0%}-PCA-{feature}_p"] = p
 
-    # Save correlation results to file
+    # Save correlation results to a file
     if FLAGS.save_corr:
         p2_corr_df = Path(paths.results.main.rsa, f"{corr_name}_{FLAGS.metric}.csv")
         if p2_corr_df.is_file():

@@ -154,7 +154,7 @@ style = "{"
 datefmt = "%Y-%m-%d %H:%M:%S"
 
 [logging.handlers.file_handler]
-level = "DEBUG"   # == 10  (pass int or string)
+level = "DEBUG"   # == 10 (pass int or string)
 formatter = "fmtfile"
 filename = "data/models/vgg_behavior/logs/vgg_predict.log"  # parent dir must exist
 class = "logging.FileHandler"

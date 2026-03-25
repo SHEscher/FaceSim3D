@@ -88,7 +88,7 @@ VICE_DIM_IND_2D: list = list(range(5))  # all: []
 VICE_DIM_IND_3D: list = list(range(5))  # all: []
 
 # Logger
-OVERWRITE_LOGGER = True  # overwrite logger file, when re-running the script
+OVERWRITE_LOGGER = True  # overwrite the logger file when re-running the script
 
 # %% Functions >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o
 
@@ -103,7 +103,7 @@ def prepare_data_for_spose_and_vice(
     !!! quote
         (...) triplets are expected to be in the format N x 3, where N = number of trials (e.g., 100k) and
         3 refers to the triplets, where col_0 = anchor_1, col_1 = anchor_2, col_2 = odd one out.
-        Triplet data must be split into train and test splits, and named `train_90.txt` and `test_10.txt`,
+        Triplet data must be split into train and test splits and named `train_90.txt` and `test_10.txt`,
         respectively.
 
     For hyperparameter tuning, prepare only a percentage of the data.
@@ -271,7 +271,7 @@ def extract_faces_for_spose_dimensions(
     # Extract representative faces
     face_dim_idx_mat = np.argsort(weights, axis=0)[::-1][:n_face, :m_dims]
     # rows: index of most representative faces (descending) | cols: most relevant dimensions (descending)
-    # E.g., face_img_idx[1, 0] = index of second most representative face for first dimension
+    # E.g., face_img_idx[1, 0] = index of the second most representative face for the first dimension
 
     if return_path:
         return face_dim_idx_mat, p2_weights
@@ -301,8 +301,8 @@ def extract_faces_for_vice_dimensions(
                     [None] all dimensions are returned
     :param pilot: True: use pilot data
     :param pruned: True: return the pruned parameters
-    :param return_path: True: return path to the parameter file
-    :param param_path: path to weight file, defined by the corresponding VICE params (after /[session]/..)
+    :param return_path: True: return the path to the parameter file
+    :param param_path: path to the weight file, defined by the corresponding VICE params (after /[session]/..)
     :return: indices of representative faces
     """
     # Load weights
@@ -394,7 +394,7 @@ def display_representative_faces(
                 axes[i, dim_i].set_xticks([])
                 axes[i, dim_i].set_xlabel(face_id)
                 axes[i, dim_i].yaxis.set_visible(False)
-                for spine in axes[i, dim_i].spines.values():  # remove axes-box around image
+                for spine in axes[i, dim_i].spines.values():  # remove the axes-box around the image
                     spine.set_visible(False)
             else:
                 # Display face images externally
@@ -422,7 +422,7 @@ if __name__ == "__main__":
         paths.results.pilot.V2 if params.PILOT else paths.results.MAIN, "logs", "computational_choice_model.log"
     )
     if OVERWRITE_LOGGER and logger_filename.is_file():
-        logger_filename.unlink()  # delete old log file
+        logger_filename.unlink()  # delete the old log file
 
     logger = update_logger_configs(
         new_logger_name="ComputationalChoiceModels",
@@ -460,7 +460,7 @@ if __name__ == "__main__":
 
     # VICE
     BEST_HP_VICE = get_best_hp_vice(hp_search=True, print_n=n_to_print_per_session)
-    # take `hp_search=True`, since the best hyperparameters are determined in the HP-search.
+    # take `hp_search=True`, since the best hyperparameters are determined in the HP search.
     if not HP_SEARCH:
         for sess in params.SESSIONS:
             BEST_HP_VICE[sess].pop("hp_perc")
@@ -491,7 +491,7 @@ if __name__ == "__main__":
         gender=None,
     )
 
-    # Print performance on last epoch
+    # Print performance on the last epoch
     mea_table = get_mea_table()
     for sess, spose_path in zip(params.SESSIONS, [p2_spose_weights_2d, p2_spose_weights_3d], strict=True):
         result_dir = Path(spose_path).parent
@@ -542,7 +542,7 @@ if __name__ == "__main__":
         param_path=param_path_vice_3d,
     )
 
-    # Print performance on last epoch
+    # Print performance on the last epoch
     for sess, vice_path in zip(params.SESSIONS, [p2_vice_weights_2d, p2_vice_weights_3d], strict=True):
         result_dir = Path(vice_path).parent
         result_fn = max(f for f in os.listdir(result_dir) if f.startswith("results"))

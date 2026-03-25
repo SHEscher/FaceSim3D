@@ -1,5 +1,5 @@
 """
-Configuration for FaceSim3D project.
+Configuration for the FaceSim3D project.
 
 **Note**: store private configs in the same folder as `config.toml`, namely: `./[PRIVATE_PREFIX]_configs.toml`
 
@@ -20,7 +20,7 @@ import toml
 
 
 def _iter_nested_dicts(nested_dict: dict[str, Any]) -> Any:
-    """Create generator iterating over values in nested dicts."""
+    """Create a generator iterating over values in nested dicts."""
     for value in nested_dict.values():
         if isinstance(value, dict):
             yield from _iter_nested_dicts(value)
@@ -39,7 +39,7 @@ class CONFIG:
     """Configuration object."""
 
     def __init__(self, config_dict: dict | None = None) -> None:
-        """Initialise CONFIG class object."""
+        """Initialize the CONFIG class object."""
         if config_dict is not None:
             self.update(config_dict)
 
@@ -97,7 +97,7 @@ class CONFIG:
 
     def update_paths(self, parent_path: str | None = None, for_logging: bool = False):
         """Update relative paths to PROJECT_ROOT dir."""
-        # Use project root dir as the parent path if it is not specified
+        # Use the project root dir as the parent path if it is not specified
         parent_path = self.PROJECT_ROOT if hasattr(self, "PROJECT_ROOT") else parent_path
 
         if parent_path is not None:
@@ -118,12 +118,12 @@ class CONFIG:
 
 
 def _set_wd() -> None:
-    """Set the given directory as new working directory of the project."""
+    """Set the given directory as the new working directory of the project."""
     if PROJECT_NAME not in str(Path.cwd()):
         msg = f'Current working dir "{Path.cwd()}" is outside of project "{PROJECT_NAME}".'
         raise ValueError(msg)
 
-    print("\033[94m" + f"Current working dir:\t{Path.cwd()}" + "\033[0m")  # blue print
+    print("\033[94m" + f"Current working dir:\t{Path.cwd()}" + "\033[0m")  # blueprint
 
     new_dir = Path(PROJECT_ROOT)
     if new_dir == Path.cwd():
@@ -146,7 +146,7 @@ def update_logger_configs(
     :param new_logger_filename: new logger filename
     :param logger: updated logger object
     """
-    # Set new logger name
+    # Set the new logger name
     logger.name = new_logger_name
 
     # Check filename
@@ -181,7 +181,7 @@ for config_file in Path(__file__).parent.glob("../configs/*config.toml"):
 PROJECT_NAME = config.PROJECT_NAME
 PROJECT_ROOT = __file__[: __file__.find(PROJECT_NAME) + len(PROJECT_NAME)]
 
-# Set root path to config file & update paths
+# Set the root path to the config file & update paths
 config.paths.PROJECT_ROOT = PROJECT_ROOT
 config.paths.update_paths()
 
@@ -189,7 +189,7 @@ config.paths.update_paths()
 config.logging.update_paths(parent_path=PROJECT_ROOT, for_logging=True)
 _create_parent_dirs(config_as_dict=config.logging.asdict())
 
-# Extract paths and variables, and set logging configs
+# Extract paths and variables and set logging configs
 paths = config.paths
 params = config.params
 logging.config.dictConfig(config.logging.asdict())
@@ -208,7 +208,7 @@ print(
     + ("*" * 95 + "\n") * 2
 )
 
-# Set project working directory
+# Set the project working directory
 _set_wd()
 
 # o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o >><< o END

@@ -26,6 +26,6 @@ In the 3D condition, participants see dynamically moving faces, providing variou
 [`UXF 2.0`](https://github.com/immersivecognition/unity-experiment-framework), based on `Unity >= 2018.4`
 has been used for the implementation of the face similarity judgment task (*triplet odd-one-out task*).
 The corresponding code can be found in `experiment/FaceSimExp/` in the repository.
-The experiment was launched as GitHub page.
+The experiment was launched as a GitHub page.
 Participants were recruited via [Prolific](https://www.prolific.co/),
 and response data were temporarily stored on **AWS** servers.

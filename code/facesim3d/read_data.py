@@ -124,19 +124,19 @@ dropouts_pilot_v2 = [
 # Relevant data columns
 SORTED_COLS_PILOT = [
     "ppid",  # participant ID
-    "trial_num",  # trial number in full participant session
+    "trial_num",  # trial number in a full participant session
     "block_num",  # number of a block
     "trial_num_in_block",  # trial number within a block
     "break_time",  # time of break after a block (always at 'trial_num_in_block' == 60)
-    "start_time",  # start time of a trial during full participant session
-    "end_time",  # end time of a trial during full participant session
+    "start_time",  # start time of a trial during a full participant session
+    "end_time",  # end time of a trial during a full participant session
     "response_time",  # response time in a trial of a participant
     "triplet_id",  # ID of face triplet
-    "correct",  # whether head was chosen or not (i.e., time passed)
+    "correct",  # whether the head was chosen or not (i.e., time passed)
     "head1",  # left head
     "head2",  # middle head
     "head3",  # right head
-    "head_odd",  # head chosen by participant to be the odd-one-out (0: none was chosen)
+    "head_odd",  # head chosen by the participant to be the odd-one-out (0: none was chosen)
     "catch_head",  # 0 if no catch trial, otherwise ID/number of the head which was duplicated to
     # create catch trial. The duplicate replaces a random other head in the triplet
     "caught",  # always False, but if a participant does not notice the catch trial, it is set to True
@@ -146,7 +146,7 @@ SORTED_COLS = [
     *SORTED_COLS_PILOT,
     "triplet",  # head-numbers of a triplet (sorted numerically)
     "session_num",  # session number (0: prolific pilot, 1-3: main)
-    "keyPress",  # key (side) pressed by participant
+    "keyPress",  # key (side) pressed by a participant
     "SystemDateTime_BeginTrial",  # Start date-time of one trial
     "ppid_session_dataname",
 ]  # ppid + session
@@ -186,7 +186,7 @@ def read_pilot_participant_data() -> pd.DataFrame:
         table_processed = table_processed.rename(columns={"ppid_session_dataname": "ppid"})
         table_processed.ppid = table_processed.ppid.replace("_s001_participant_details", "", regex=True)
 
-        # Remove UnlockTriplets user (has NaN's in 'group_exp' column)
+        # Remove UnlockTriplets user (has NaN's in the 'group_exp' column)
         table_processed = table_processed[table_processed.ppid != "UnlockTriplets"].reset_index(drop=True)
         # table_processed.drop(index=table_processed[table_processed.group_exp.isna()].index, axis=1,
         #                      inplace=True)  # This should be the UnlockTriplets 'User'
@@ -288,7 +288,7 @@ def _read_pilot_results_json_data_via_s3(verbose: bool = False) -> pd.DataFrame:
         trial_result_dirs = trial_result_dirs.pop()
     trial_result_dirs = Path(p2_pilot_s3, trial_result_dirs)
 
-    # Set path to processed trial table
+    # Set the path to the processed trial table
     trial_result_full_table_path = Path(str(trial_result_dirs) + ".csv")
 
     # Check if the full (concatenated) table is already there
@@ -305,7 +305,7 @@ def _read_pilot_results_json_data_via_s3(verbose: bool = False) -> pd.DataFrame:
             # Process json file via pandas
             table_raw = pd.read_json(p2_json, lines=True)
 
-            # Remove type info from json file
+            # Remove type info from the JSON file
             for row in table_raw.values:  # noqa: PD011
                 current_row = row.item()
                 # pprint(current_row)  # from pprint import pprint  # noqa: ERA001
@@ -316,14 +316,14 @@ def _read_pilot_results_json_data_via_s3(verbose: bool = False) -> pd.DataFrame:
                 copy_row[~pd.isna(copy_row)] = np.nan
                 trial_tab = pd.concat([trial_tab, copy_row])
 
-                # Write non-nan-value in empty row for each column
+                # Write non-nan-value in the empty row for each column
                 for col in trial_tab.columns:
                     trial_tab.iloc[-1][col] = trial_tab[col].dropna().item()
 
                 # Keep only filled row
                 trial_tab = trial_tab.iloc[-1:]
 
-                # Concatenate to big table
+                # Concatenate to a big table
                 table_processed = trial_tab if table_processed is None else pd.concat([table_processed, trial_tab])
                 # , ignore_index=True)
 
@@ -419,7 +419,7 @@ def get_list_of_acquired_sets() -> list:
 
 
 def load_local_table(table_name: str | None = None) -> pd.DataFrame | None:
-    """Load a `UXFData.FaceSim.*` table from the local storage system."""
+    """Load the `UXFData.FaceSim.*` table from the local storage system."""
     if table_name is None:
         cprint(string="Specify the table to load:", col="y", fm="ul")
         p2_table = browse_files(initialdir=paths.data.MAIN, filetypes="*.csv")
@@ -443,7 +443,7 @@ def load_local_table(table_name: str | None = None) -> pd.DataFrame | None:
     # Load tablet
     tab = pd.read_csv(p2_table)
 
-    # Convert table rows if necessary: unpack the DynamoDB json format
+    # Convert table rows if necessary: unpack the DynamoDB JSON format
     for col in tab.columns:
         if isinstance(tab[col][0], str) and tab[col][0].startswith("[{"):
             tab[col] = tab[col].map(literal_eval)
@@ -453,8 +453,8 @@ def load_local_table(table_name: str | None = None) -> pd.DataFrame | None:
                 tab[col] = convert_dynamodb_json_in_row_of_df(df_row=tab[col])
             elif isinstance(tab[col][0], list) and len(tab[col][0]) > 1:
                 # Primarily a case for 'UXFData.FaceSim.SessionLog'.
-                # Most cells in row (i.e., one participant session)
-                # are lists of DynamoDB jsons (i.e., dicts)
+                # Most cells in the row (i.e., one participant session)
+                # are lists of DynamoDB JSONs (i.e., dicts)
                 # convert [{'S': 'Log'}, {'S': 'Log'}, , ...] -> [Log, Log, ...] per row
                 tab[col] = tab[col].map(lambda x: [cell[next(iter(cell.keys()))] for cell in x])
             else:
@@ -525,7 +525,7 @@ def read_prolific_participant_data(
     Read the participant table of a given Set downloaded from Prolific.
 
     :param set_nr: Prolific Set number 2.* for 2D AND 3.* for 3D
-    :param return_path: if True also return the path to the file
+    :param return_path: if True also returns the path to the file
     :returns: participant table of the given Prolific Set
     """
     p_files = [
@@ -545,7 +545,7 @@ def read_prolific_participant_data(
     full_path = Path(paths.data.main.prolific, p_files)
     ppid_prolific_table = pd.read_csv(full_path)
 
-    # Add decision column (if not there)
+    # Add a decision column (if not there)
     if "decision" not in ppid_prolific_table.columns:
         ppid_prolific_table["decision"] = np.nan
 
@@ -556,7 +556,7 @@ def read_prolific_participant_data(
 
 def get_participant_session(ppid: str, pilot: bool = params.PILOT) -> str | None:
     """
-    Get session (2D, 3D) of the given participant ID (`ppid`).
+    Get the session (2D, 3D) of the given participant ID (`ppid`).
 
     !!! note
         Participant can only be part of one session (2D or 3D).
@@ -565,7 +565,7 @@ def get_participant_session(ppid: str, pilot: bool = params.PILOT) -> str | None
     :param pilot: True: use pilot data
     :return: session of participant
     """
-    # Get participant table
+    # Get the participant table
     pid_table = read_pilot_participant_data() if pilot else read_participant_data()
     session = pid_table[pid_table.ppid == ppid].group_exp
     session = session.drop_duplicates()
@@ -580,7 +580,7 @@ def get_participant_session(ppid: str, pilot: bool = params.PILOT) -> str | None
 
 def get_participant_set_numbers(ppid: str) -> list[str]:
     """
-    Get the Set-number(s) of a given participant.
+    Get the Set number(s) of a given participant.
 
     !!! note
         Participants can be part of up to three sets, however, only of one session (2D or 3D).
@@ -595,7 +595,7 @@ def get_participant_set_numbers(ppid: str) -> list[str]:
 
 
 def convert_date_time(date_time: str) -> str:
-    """Convert date-time string to format `YYYY-MM-DD HH:MM:SS:MS`."""
+    """Convert a date-time string to format `YYYY-MM-DD HH:MM:SS:MS`."""
     if pd.isna(date_time):
         return date_time
     if not date_time.startswith("2022-") and not date_time.startswith("2023-"):
@@ -634,9 +634,9 @@ def merge_tables(df: pd.DataFrame, table_name: str) -> tuple[pd.DataFrame, bool]
 
 def archive_former_tables(path_to_save: str | Path, table_name: str) -> None:
     """
-    Move former tables to archive.
+    Move former tables to the archive.
 
-    :param path_to_save: Path where new table will be saved
+    :param path_to_save: Path where the new table will be saved
     :param table_name: name of table
     """
     list_of_other_tables = Path(str(path_to_save)).parent.glob(f"*{table_name}.csv")
@@ -647,7 +647,7 @@ def archive_former_tables(path_to_save: str | Path, table_name: str) -> None:
 
 
 def load_table_from_dynamodb(table_name: str | None = None, save: bool = False, merge: bool = False) -> pd.DataFrame:
-    """Load a `UXFData.FaceSim.*` table from DynamoDB."""
+    """Load the `UXFData.FaceSim.*` table from DynamoDB."""
     dynamodb = boto3.resource("dynamodb", region_name="eu-central-1")  # connect to DynamoDB
 
     table_list = list(dynamodb.tables.all())  # pull all tables (names) from DynamoDB
@@ -706,7 +706,7 @@ def load_table_from_dynamodb(table_name: str | None = None, save: bool = False, 
             loaded_df[col] = loaded_df[col].map(lambda x: x[0])
         # Do not unpack those with list length > 1
 
-        # Correct datetime in table
+        # Correct datetime in the table
         if "SystemDateTime" in col:
             loaded_df[col] = loaded_df[col].map(convert_date_time)
 
@@ -775,7 +775,7 @@ def load_table_from_dynamodb(table_name: str | None = None, save: bool = False, 
             df_split.to_csv(path_to_save_split, index=False)
 
         if merge:
-            # Move former tables to archive
+            # Move former tables to the archive
             archive_former_tables(path_to_save=path_to_save, table_name=table_name)
             if path_to_save_split is not None:
                 archive_former_tables(path_to_save=path_to_save_split, table_name=table_name_split)
@@ -808,7 +808,7 @@ def load_trial_results_from_dynamodb(
     verbose: bool = True,
 ) -> pd.DataFrame:
     """
-    Load all trial-results from `DynamoDB`.
+    Load all trial results from `DynamoDB`.
 
     ??? tip "Blog posts on getting data from DynamoDB with Python and Boto3"
 
@@ -882,7 +882,7 @@ def load_trial_results_from_dynamodb(
 
 
 def delete_all_items_in_table_on_dynamodb(table_name: str) -> None:
-    """Delete all items in table on `DynamoDB` (e.g., `'UXFData.FaceSim.TrialResults'`)."""
+    """Delete all items in the table on `DynamoDB` (e.g., `'UXFData.FaceSim.TrialResults'`)."""
     delete = ask_true_false(
         f"\nAre you sure you downloaded and saved all data/items of table '{table_name}' from DynamoDB?", col="r"
     )
@@ -1005,7 +1005,7 @@ def read_and_convert_s3_results_json_data(verbose: bool = False) -> pd.DataFrame
         trial_result_dirs = trial_result_dirs.pop()
     trial_result_dirs = Path(p2_s3, trial_result_dirs)
 
-    # Set path to processed trial table
+    # Set the path to the processed trial table
     trial_result_full_table_path = Path(paths.data.MAIN, f"{trial_result_dirs.name}_UXFData.FaceSim.TrialResults.csv")
 
     # Check if the full (concatenated) table is already there
@@ -1036,7 +1036,7 @@ def read_and_convert_s3_results_json_data(verbose: bool = False) -> pd.DataFrame
                 td = pd.DataFrame(td, columns=["col_name", "type"])
                 type_dict = dict(zip(td["col_name"], td["type"].map(DT_MAP), strict=True))
 
-            # Remove type info from json file
+            # Remove type info from the JSON file
             for row in tqdm(table_raw.values, desc=f"Read rows of '{json_file_path}'", position=1):
                 current_row = row.item()
 
@@ -1052,7 +1052,7 @@ def read_and_convert_s3_results_json_data(verbose: bool = False) -> pd.DataFrame
                 copy_row[~pd.isna(copy_row)] = np.nan
                 trial_tab = pd.concat([trial_tab, copy_row])
 
-                # Write non-nan-value in empty row for each column
+                # Write non-nan-value in an empty row for each column
                 for col in trial_tab.columns:
                     trial_tab.iloc[-1][col] = trial_tab[col].dropna().item()
 
@@ -1071,7 +1071,7 @@ def read_and_convert_s3_results_json_data(verbose: bool = False) -> pd.DataFrame
                     # catch trials
                     continue
 
-                # Concatenate to big table
+                # Concatenate to a big table
                 table_processed = trial_tab if table_processed is None else pd.concat([table_processed, trial_tab])
                 # , ignore_index=True)
 
@@ -1084,7 +1084,7 @@ def read_and_convert_s3_results_json_data(verbose: bool = False) -> pd.DataFrame
         # Remove unnecessary columns & sort the rest
         table_processed = table_processed[SORTED_COLS]
 
-        # Solve date issue
+        # Solve the date issue
         table_processed.SystemDateTime_BeginTrial = table_processed.SystemDateTime_BeginTrial.map(convert_date_time)
 
         # Sort rows table by ppid and start time/date of trial
@@ -1124,10 +1124,10 @@ def where_to_find_trial_and_log_data(set_nr: str, update_table: bool = False) ->
         for p2_ppid_set in tqdm(
             set_files, desc="Find tables for each Set", total=len(set_files), position=0, colour="#51F1EE"
         ):
-            # Get set number
+            # Get a set number
             current_set_nr = p2_ppid_set.name.split("-Set")[-1].split("_")[0]
 
-            # Get participants of current Set
+            # Get participants of the current Set
             ppid_set = read_prolific_participant_data(set_nr=current_set_nr)["Participant id"].to_list()
 
             # Populate table
@@ -1170,11 +1170,11 @@ def where_to_find_trial_and_log_data(set_nr: str, update_table: bool = False) ->
         # Return table
         return where_table[where_table.set_nr == set_nr]
 
-    # else use:  # len(p2_where_table) == 1:
+    # else use: # len(p2_where_table) == 1:
     p2_where_table = p2_where_table.pop()
     where_table = pd.read_csv(p2_where_table, dtype=object)
 
-    # Check if set_nr is in table (if not update table)
+    # Check if set_nr is in the table (if not update table)
     if len(where_table[where_table.set_nr == set_nr]) == 0:
         cprint(string=f"Set{set_nr} is not in table {p2_where_table.name}. Updating table ...", col="y")
         where_table = where_to_find_trial_and_log_data(set_nr=set_nr, update_table=True)
@@ -1279,7 +1279,7 @@ def read_trial_results_of_set(set_nr: str, clean_trials: bool = True, verbose: b
                 _read_trial_results(process=False, date=p2_tr_table.split("_")[0]), ignore_index=True
             )
 
-    # Remove participants from table which are not part of given Set (set_nr)
+    # Remove participants from the table which are not part of the given Set (set_nr)
     prolific_set_ppids = read_prolific_participant_data(set_nr=set_nr)["Participant id"]
 
     th_multi_sub_sample: int = 20
@@ -1328,11 +1328,11 @@ def save_merged_tables_of_set(set_nr: str) -> None:
         prefix_date_m = prefix_date[:10] + "m"
         table_merged.to_csv(Path(paths.data.MAIN, f"{prefix_date_m}_{suffix}"), index=False)
 
-        # Move other tables to "archive" folder
+        # Move other tables to the "archive" folder
         for table_name in where_tab[where_tab.type == table_type].table_name:
             Path(paths.data.MAIN, table_name).rename(Path(paths.data.MAIN, "archive", table_name))
 
-    # Remove table location file in where_to_find_trial_and_log_data()
+    # Remove the table location file in where_to_find_trial_and_log_data()
     Path(paths.data.MAIN, "Where_are_TrialResults_and_Logs.csv").unlink()
 
     cprint(
@@ -1400,7 +1400,7 @@ def read_logs_of_set(set_nr: str) -> pd.DataFrame:
             print("Append:", p2_log_table)
             log_table = log_table.append(load_local_table(table_name=p2_log_table))
 
-    # Remove participants from table which are not part of given Set (set_nr)
+    # Remove participants from the table which are not part of the given Set (set_nr)
     prolific_set_ppids = read_prolific_participant_data(set_nr=set_nr)["Participant id"]
     if not (log_table.ppid.isin(prolific_set_ppids)).all():
         cprint(
@@ -1554,7 +1554,7 @@ def update_triplet_table_on_dynamodb(
     key_schema = db_table.key_schema
     key_names = [k["AttributeName"] for k in key_schema]
 
-    # Load current state of triplet table
+    # Load the current state of the triplet table
     cprint(string=f"Loading current state of {session} triplet table ...", col="b")
     response = db_table.scan()
     data = response["Items"]
@@ -1616,7 +1616,7 @@ def finalized_triplets_multi_sub_sample() -> list[int]:
     """
     Provide an overview of finalized triplets.
 
-    For the given session of the multi-sampled-sub-sample provide an overview & return the list of remaining triplets.
+    For the given session of the multi-sampled-subsample provide an overview and return the list of remaining triplets.
     """
     n_all_triplets = np.math.comb(params.multisubsample.n_faces, 3)
 
@@ -1659,10 +1659,10 @@ def finalized_triplets_multi_sub_sample() -> list[int]:
 
 def update_triplet_table_on_dynamodb_multi_sub_sample(session: str, set_finalised_triplets_to_g: bool = True) -> None:
     """
-    Update triplet table on `DynamoDB` for the given session of the `multi-sampled-sub-sample`.
+    Update the triplet table on `DynamoDB` for the given session of the `multi-sampled-subsample`.
 
     Note: This asserts that all data on `DynamoDB` is only from the given session.
-    Do not execute this function, if also data from other sessions is on `DynamoDB`.
+    Do not execute this function if also data from other sessions is on `DynamoDB`.
     """
     cprint(
         f"\nUpdating triplet table on DynamoDB for the {session}-session of the multi-sampled-sub-sample ...\n",
@@ -1689,7 +1689,7 @@ def update_triplet_table_on_dynamodb_multi_sub_sample(session: str, set_finalise
     key_schema = db_table.key_schema
     key_names = [k["AttributeName"] for k in key_schema]
 
-    # Load current state of triplet table
+    # Load the current state of the triplet table
     cprint(string=f"Loading current state of {session} triplet table ...", col="b")
     response = db_table.scan()
     data = response["Items"]

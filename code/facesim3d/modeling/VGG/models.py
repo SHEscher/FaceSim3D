@@ -91,7 +91,7 @@ def get_vgg_layer_names() -> list[str]:
 
 @lru_cache(maxsize=1)
 def read_vgg_layer_table() -> pd.DataFrame:
-    """Read the table with `VGG` layer names and corresponding output shapes, and number of parameters."""
+    """Read the table with `VGG` layer names and corresponding output shapes, and the number of parameters."""
     return pd.read_csv(
         filepath_or_buffer=paths.data.models.vgg.output_shapes,
         sep="\t",
@@ -222,7 +222,7 @@ class VGGFace(nn.Module):
         # Forward through feature layers
         for layer in self.features.values():
             x = layer(x)
-            # Append layer output to list
+            # Append layer output to the list
             if self.save_layer_output:
                 self.layer_output.append(x)
 
@@ -408,7 +408,7 @@ class VGGcore(nn.Module):
             raise ValueError(msg)
 
         if "-dropout" in last_core_layer:
-            # Replace dropout layer with the previous relu layer
+            # Replace the dropout layer with the previous relu layer
             self.last_core_layer = last_core_layer = last_core_layer.replace("-dropout", "-relu")
             cprint(
                 string="Cutting at the dropout layer is not possible!\n"
@@ -416,7 +416,7 @@ class VGGcore(nn.Module):
                 col="y",
             )
 
-        # Iterate backwards through network and delete layers until last_core_layer
+        # Iterate backwards through the network and delete layers until last_core_layer
         self._layer_names = []  # reset layer names
         cut_done = False
         for name, child in reversed(list(self.vgg_core.named_children())):
@@ -488,7 +488,7 @@ class VGGMultiView(VGGcore):
         super().__init__(freeze_vgg_core=freeze_vgg_core, last_core_layer=last_core_layer, verbose=verbose)
         self.verbose = verbose
 
-        # Create decision layer above the last core layer of VGGFace
+        # Create a decision layer above the last core layer of VGGFace
         self.decision_layer = nn.ModuleDict(
             OrderedDict(
                 {
@@ -589,7 +589,7 @@ class VGGFaceHumanjudgmentBase(nn.Module, ABC):
         else:
             self.vgg_core_bridge = create_fc_bridge(last_core_layer=self.last_core_layer)
 
-        # Create decision block
+        # Create a decision block
         self.decision_block_mode = decision_block
 
         # Set decision block, too
@@ -613,7 +613,7 @@ class VGGFaceHumanjudgmentBase(nn.Module, ABC):
 
     @last_core_layer.setter
     def last_core_layer(self, layer_name: str):
-        """Set core cut layer."""
+        """Set the core cut layer."""
         # Check type
         if not isinstance(layer_name, str):
             msg = f"Core cut layer must be str, not {type(layer_name)}"
@@ -622,9 +622,9 @@ class VGGFaceHumanjudgmentBase(nn.Module, ABC):
         # Prepare name
         layer_name = layer_name.lower()
 
-        # Check for dropout layer
+        # Check for the dropout layer
         if "-dropout" in layer_name:
-            # Replace dropout layer with the previous relu layer
+            # Replace the dropout layer with the previous relu layer
             layer_name = layer_name.replace("-dropout", "-relu")
             cprint(
                 string="Cutting at the dropout layer is not possible!\n"
@@ -679,7 +679,7 @@ class VGGFaceHumanjudgmentBase(nn.Module, ABC):
 
     @decision_block.setter
     def decision_block(self, module: nn.ModuleDict) -> None:
-        """Set decision block."""
+        """Set the decision block."""
         if not isinstance(module, nn.ModuleDict):
             msg = f"Decision block must be nn.ModuleDict, not {type(module)}"
             raise TypeError(msg)
@@ -1029,7 +1029,7 @@ def load_trained_vgg_face_human_judgment_model(
         model_name = model_name.removesuffix("_final.pth")
         p2_model = p2_model_root / f"{model_name}_final.pth"
 
-    # Load hyperparameters from table
+    # Load hyperparameters from the table
     hp_tab = get_vgg_performance_table(exclusive_gender_trials=exclusive_gender_trials)
     model_hps = hp_tab[hp_tab.model_name == model_name]
     decision_block = model_hps.dblock.to_numpy()[0]
@@ -1075,7 +1075,7 @@ def get_vgg_performance_table(
     Get the performance table for `VGGFace` models.
 
     :param sort_by_acc: Sort table by accuracy.
-    :param hp_search: True: Use hyperparameter search table.
+    :param hp_search: True: Use the hyperparameter search table.
     :param exclusive_gender_trials: For models trained on exclusive gender trials ['female' OR 'male'], OR None.
     :return: VGGface performance table.
     """

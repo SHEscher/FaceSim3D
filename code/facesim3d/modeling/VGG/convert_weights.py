@@ -31,7 +31,7 @@ WEIGHT_FILE: str = "VGG_FACE.t7"
 
 def download_torch_weights() -> Path:
     """Download `torch` weights for `VGG-Face` if necessary."""
-    # Create output directory (if necessary)
+    # Create the output directory (if necessary)
     p2_model = Path(paths.data.models.vggface).parent
     p2_model.mkdir(parents=True, exist_ok=True)
 
@@ -39,7 +39,7 @@ def download_torch_weights() -> Path:
 
     if not p2_torch_weights.is_file():
         torch_tar_file = Path(paths.data.models.vggface).parent / "vgg_face_torch.tar.gz"
-        # Download tar.gz file
+        # Download the tar.gz file
         cprint(string="Downloading VGG-Face torch weights 'vgg_face_torch.tar.gz'...", col="b")
         urllib.request.urlretrieve(
             url="http://www.robots.ox.ac.uk/~vgg/software/vgg_face/src/vgg_face_torch.tar.gz", filename=torch_tar_file

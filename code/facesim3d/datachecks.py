@@ -1,6 +1,6 @@
 # !/usr/bin/env python3
 """
-Check data from the triplet-odd-one out task.
+Check data from the triplet-odd-one-out task.
 
 This script can be run via the command line interface (CLI).
 
@@ -76,8 +76,8 @@ ACCEPT_AT_BQS = 2  # BQS threshold for automatic acceptance of participants
 TH_MONO = 6  # threshold for monotonous choices of the same side
 TH_MONO_RT = 4.0  # threshold for response time (responses longer than this are not considered as
 # monotonous behavior, which is considered as behavior of inattentive participants, who want to save time)
-TH_RT = 1.5  # set threshold (in seconds) for rapid response times (all below this is considered rapid)
-# could adapt TH_RT based on condition 3D should be a bit longer
+TH_RT = 1.5  # set a threshold (in seconds) for rapid response times (all below this is considered rapid)
+# could adapt TH_RT based on the condition 3D should be a bit longer
 
 W_CATCH = 1.0  # BQS weight for catch trials
 W_MONO = 1 / 6  # BQS weight for monotonous choices (currently: 1/TH_MONO)
@@ -106,7 +106,7 @@ def check_catch_trials(trial_results_table: pd.DataFrame, verbose: bool = False)
 
 def get_choice_side(table_row: pd.Series, verbose: bool = True) -> int | None:
     """Get side of choice in a trial (left, middle, right)."""
-    # Could include new keypress column in TrialResults table
+    # Could include a new keypress column in the TrialResults table
     head_cols = ["head1", "head2", "head3", "head_odd"]
     keypress_dict = {"LeftArrow": 0, "DownArrow": 1, "UpArrow": 1, "RightArrow": 2}
     if table_row.keyPress in keypress_dict:
@@ -127,18 +127,18 @@ def get_choice_side(table_row: pd.Series, verbose: bool = True) -> int | None:
         and not np.isnan(table_row.head_odd)
         and str(int(table_row.head_odd)) not in table_row.triplet
     ):
-        # print only if choice was made and triplet does not contain head_odd
+        # print only if a choice was made and the triplet does not contain head_odd
         cprint(string=f"Something is wrong in given table row:\n{table_row[head_cols]}", col="r")
         print(table_row)
     return None
 
 
 def check_monotonous_choices(trial_results_table: pd.DataFrame, set_nr: str, verbose: bool = False) -> pd.DataFrame:
-    """Check monotonous choices (i.e., participant chooses repeatedly same side (left, middle, right))."""
+    """Check monotonous choices (i.e., participant chooses repeatedly the same side (left, middle, right))."""
     global __monoton_table, __prev_set_nr  # noqa: PLW0603
     # Note: this assumes that each FLAGS.set_nr is run separately (i.e., starting the script freshly)
     try:
-        # Check if table is cached as global variable (for multiple calls)
+        # Check if the table is cached as a global variable (for multiple calls)
         __monoton_table  # noqa: B018
         if __prev_set_nr != set_nr:
             msg = "Previous set number is different from current set number."
@@ -162,7 +162,7 @@ def check_monotonous_choices(trial_results_table: pd.DataFrame, set_nr: str, ver
                 prev_ppid = ppid
                 continue
 
-            # Check whether the previous choice side is equal to current choice side of same participant
+            # Check whether the previous choice side is equal to the current choice side of the same participant
             if cs == prev_cs and ppid == prev_ppid and row.response_time <= TH_MONO_RT:
                 cs_cnt += 1
             else:
@@ -354,7 +354,7 @@ def get_quality_score_table(
         if not save and save_path.exists():  # if save is True, (re-)compute the table
             bqs_tab = pd.read_csv(save_path)
             if set(bqs_tab.ppid) == set(trial_results_table.ppid):
-                # Only return table if it contains all participants (otherwise compute scores below)
+                # Only return the table if it contains all participants (otherwise compute scores below)
                 if verbose:
                     print("Found existing table.")
                 return bqs_tab
@@ -407,12 +407,12 @@ def get_quality_score_table(
                     sj = j  # update start index
                 prev_tn = tn  # update previous trial number
 
-            # Add bad quality score to table
+            # Add bad quality score to the table
             bqs_tab.loc[idx, "mono_bqs"] += p_bqs
 
         # Check timeouts
         if t_tab.ppid.str.contains(ppid).any():
-            # Higher number of timeouts leads to a higher bad quality score (bqs)
+            # A higher number of timeouts leads to a higher bad quality score (bqs)
             p_t_tab = t_tab.loc[t_tab.ppid == ppid]
             p_t_tab = p_t_tab[p_t_tab.trial_num > params.n_train_trials]  # exclude training trials
 
@@ -464,7 +464,7 @@ def get_quality_score_table(
 
 
 def explore_quality_score_of_single_participant(ppid: str, set_nr: str, trial_results_table: pd.DataFrame) -> None:
-    """Explore quality score of single participant."""
+    """Explore the quality score of a single participant."""
     qs_table = get_quality_score_table(set_nr=set_nr, save=False, verbose=False)
 
     if not qs_table.loc[qs_table.ppid == ppid].empty:
@@ -506,14 +506,14 @@ def review_prolific_participants(
     force_review: bool = False,
 ) -> None:
     """
-    Review participants for low quality data and make a decision for Prolific.
+    Review participants for low-quality data and make a decision for Prolific.
 
     :param set_nr: Set number (2D: 2.0, 2.1, ... | 3D: 3.0, 3.1, ...) [str]
     :param ppids_to_review: list of Prolific participant IDs to review
     :param plot_rt: whether to plot response time distribution
     :param accept_at_bqs: auto accept participants with BQS below this threshold
     :param force_review: if True: force review of participants even if they have already been reviewed
-    :return: table with participants with decision based on BQS and individual factors (behaviour)
+    :return: table with participants with decision based on BQS and individual factors (behavior)
     """
     # Load Prolific participant data for given Set
     p_table, p2_p_table = read_prolific_participant_data(set_nr=set_nr, return_path=True)
@@ -537,13 +537,13 @@ def review_prolific_participants(
         ppid_info = p_table.loc[p_table["Participant id"] == ppid].copy()
 
         if ppid_info.empty:
-            # Participant not in Prolific table, probably due to returned/aborted experiment
+            # Participant not in the Prolific table, probably due to returned/aborted experiment
             cprint(string=f"No participant information of '{ppid}' in Set{set_nr}.", col="g")
             continue
 
         current_decision = ppid_info[d_col].item()
 
-        # Check whether participant has to be reviewed
+        # Check whether the participant has to be reviewed
         if not force_review and (
             (current_decision != decision_dict["o"] and not pd.isna(current_decision))
             or ppid_info.Status.item() != "AWAITING REVIEW"
@@ -556,13 +556,13 @@ def review_prolific_participants(
         # Provide overview of data quality of participant
         explore_quality_score_of_single_participant(ppid=ppid, set_nr=set_nr, trial_results_table=trial_results_table)
 
-        # A comparison the participant's response times to the population mean
+        # A comparison of the participant's response times to the population mean
         ppid_rt_stat = trial_results_table[trial_results_table.ppid == ppid].response_time.describe()
         print(f"\nParticipant mean RT: {ppid_rt_stat['mean']:.2f} ± {ppid_rt_stat['std']:.2f} sec")
         cprint(string=f"Population  mean RT: {rt_stat['mean']:.2f} ± {rt_stat['std']:.2f} sec", col="g", fm="ul")
         cprint(string=f"Difference  mean RT:{ppid_rt_stat['mean'] - rt_stat['mean']:.2f} sec", col="y", fm="bo")
 
-        # Decide on single participant
+        # Decide on a single participant
         if plot_rt:
             plt.figure(num=f"Response time histogram of '{ppid}'", figsize=(12, 8))
             h = sns.histplot(
@@ -678,7 +678,7 @@ def prob_catch_trials(r: int, n: int = params.n_catch_trials, verbose: bool = Fa
         px += ncr * p_c**r_i * p ** (n - r_i)  # binomial probability P(X=r_i)
     print(f"The chance of having less than {r + 1} catch(es) in {n} catch-trials is: {px:.2%}")
 
-    # Compute probability of number of passed-catch-trials being equal or higher than n-r-times
+    # Compute probability of the number of passed-catch-trials being equal or higher than n-r-times
     if verbose:
         px2 = 0  # px == px2 !
         for r_j in range(n - r, n + 1):
@@ -708,7 +708,7 @@ def display_faces_of_trial(table_row: pd.Series, verbose: bool = False) -> None:
 
     color = "green"
     if is_catch_trial and table_row.caught:
-        color = "indianred"  # in case of missed catch trial
+        color = "indianred"  # in case of a missed catch trial
         title += " | Caught"
 
     fig, axs = plt.subplots(nrows=1, ncols=3, sharex=True, sharey=True, num=title, figsize=(12, 4))
@@ -733,7 +733,7 @@ def display_faces_of_trial(table_row: pd.Series, verbose: bool = False) -> None:
 
 
 def display_faces_of_catch_trials(ppid: str, set_nr: str, misses_only: bool = True, verbose: bool = False) -> None:
-    """Display the faces of catch trials for given participant."""
+    """Display the faces of catch trials for the given participant."""
     tr_table = read_trial_results_of_participant(ppid=ppid, clean_trials=False, verbose=verbose)
     tr_table = tr_table[~tr_table.caught.isna()]  # remove trials w/o data
     keep_session = f"{ppid}_{set_infix(set_nr)}_trial_results"  # keep data of Set-session only
@@ -834,7 +834,7 @@ def update_block_list(verbose: bool = False) -> None:
         block_list_dict[set_nr].extend(ppids_with_3_sets)
         ppids_participated = [ppid for ppid in ppids_participated if ppid not in ppids_with_3_sets]
 
-        # Remove exceptions from blocklist
+        # Remove exceptions from the blocklist
         for e in exception_list_dict[set_nr]:
             if e in block_list_dict[set_nr]:
                 block_list_dict[set_nr].remove(e)
@@ -863,7 +863,7 @@ def update_block_list(verbose: bool = False) -> None:
 
 
 def print_ppid_list_to_block(set_nr: str, per_session: bool = True) -> None:
-    """Print a comma separated list of ppid to block on Prolific."""
+    """Print a comma-separated list of ppid to block on Prolific."""
     # Update list first
     update_block_list(verbose=False)
 
@@ -989,7 +989,7 @@ def estimate_remaining_costs(in_euro: bool, verbose: bool = False) -> pd.DataFra
     )
     df_cost_ppid = pd.DataFrame(columns=["ppid", "set_nr", "cost"])
     for set_nr in list_of_acquired_sets:
-        # Extract number of accepted/approved participants
+        # Extract the number of accepted/approved participants
         ppid_table = read_prolific_participant_data(set_nr=set_nr)
         ppid_approved = ppid_table[(ppid_table.Status == "APPROVED") | (ppid_table.decision == "accept")][
             "Participant id"
@@ -1001,7 +1001,7 @@ def estimate_remaining_costs(in_euro: bool, verbose: bool = False) -> pd.DataFra
         tr_table = tr_table[~tr_table.caught.isna()]  # remove trials w/o data
         tr_table = tr_table[tr_table.block_num > 1]  # remove training trials
 
-        # Extract number of participants without data
+        # Extract the number of participants without data
         ppid_wo_data = ppid_approved[~ppid_approved.isin(tr_table.ppid.unique())]
         n_ppid_wo_data += len(ppid_wo_data)
 
@@ -1097,7 +1097,7 @@ def estimate_remaining_costs(in_euro: bool, verbose: bool = False) -> pd.DataFra
         session_df.loc[sess, "data_loss_trials"] = sess_perc_data_loss_trials
         print(f"• in {sess}: {sess_perc_data_loss_trials:.2%}")
 
-    # Compute the required number of participants to finalize sampling based on DynamoDB triplet table
+    # Compute the required number of participants to finalize sampling based on the DynamoDB triplet table
     total_expected_n_ppid_triplets = np.math.ceil(ideal_n_ppid / (1 - perc_data_loss_triplets))
     expected_remaining_n_ppids_triplets = np.math.ceil(
         (n_unseen_triplets / n_trials_per_ppid) / (1 - perc_data_loss_triplets)
@@ -1152,7 +1152,7 @@ def estimate_remaining_costs(in_euro: bool, verbose: bool = False) -> pd.DataFra
         print(f"• {sess}: {session_df.loc[sess, 'mean_costs_per_ppid']:.2f}")
 
     if verbose:
-        # Percentage of participants that get bonus
+        # Percentage of participants that get a bonus
         perc_all_pass = len(df_mean_catch[df_mean_catch.n_catches == 0]) / len(df_mean_catch)
         print(f"Participants who get bonus (no-catch): {perc_all_pass:.2%}")
         for sess in params.SESSIONS:
@@ -1333,7 +1333,7 @@ def determine_optimal_set_of_triplets_for_resampling() -> None:
 
 def main():
     """Run the main function to check response data."""
-    # Check data of given Set
+    # Check data of the given Set
     cprint(string="\n" + "*" * 26 + f"\nChecking data of 'Set{FLAGS.set_nr}':\n" + "*" * 26 + "\n", col="b", fm="ul")
 
     # Identify potential low quality data
@@ -1389,7 +1389,7 @@ def main():
             accept_at_bqs=ACCEPT_AT_BQS,
         )
 
-        # Review hand selected participants
+        # Review the hand-selected participants
         review_prolific_participants(set_nr=FLAGS.set_nr, plot_rt=True, force_review=True, ppids_to_review=[])
 
         # Review participants which are left over (usually ppids w/o trial data)
@@ -1403,7 +1403,7 @@ def main():
             set_nr=FLAGS.set_nr, plot_rt=True, force_review=True, ppids_to_review=ppids_wo_review.to_list()
         )
 
-        # Compute comma separated (or new line) list of ppid to accept on Prolific
+        # Compute a comma-separated (or new line) list of ppid to accept on Prolific
         print_ppid_list_to_accept(set_nr=FLAGS.set_nr)
 
         # Compile list for bonus payment

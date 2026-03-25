@@ -120,7 +120,7 @@ class VGGFaceHumanjudgmentDataset(Dataset):
                 drop=True
             )
 
-        # Take random subsample of size self._size
+        # Take a random subsample of size self._size
         if isinstance(self._size, int):
             if self._size > len(self.session_data):
                 cprint(
@@ -168,7 +168,7 @@ class VGGFaceHumanjudgmentDataset(Dataset):
                 msg = f"Core cut layer must be in {VGG_LAYER_NAMES}."
                 raise ValueError(msg)
             if "-dropout" in layer:
-                # Replace dropout layer with the previous relu layer
+                # Replace the dropout layer with the previous relu layer
                 layer = layer.replace("-dropout", "-relu")
                 cprint(
                     string="Getting the data of the dropout layer is not possible!\n"
@@ -208,7 +208,7 @@ class VGGFaceHumanjudgmentDataset(Dataset):
     def vgg_core_output(self):
         """Return the `VGG core` output."""
         if self._vgg_core_output is None:
-            # Set path to feature map
+            # Set path to the feature map
             #   take the output of max pool after conv_5_3 layer, since it showed the highest R with
             #   human judgments in the RSA
             ln_out = self.last_core_layer  # former output came from "fc7-relu" layer [before 2023-04-03]
@@ -333,20 +333,20 @@ def prepare_data_for_human_judgment_model(
     """
     Prepare data for the `VGG-Face`-model for human similarity judgments.
 
-    Split the data into a train, validation and test set.
+    Split the data into a train, validation, and test set.
 
     :param session: '2D' OR '3D'
     :param frozen_core: prepare data for frozen VGG core or not
     :param data_mode: use "2d-original", "3d-reconstructions", or "3d-perspectives" as input images
     :param last_core_layer: must be given if frozen_core is True
-    :param split_ratio: ratio of train, validation and test set
+    :param split_ratio: the ratio of train, validation, and test set
     :param batch_size: batch size for dataloader
     :param shuffle: shuffle data
     :param num_workers: number of workers for dataloader
     :param dtype: data type for images
     :param size: optionally define total size of data (which then gets split)
     :param exclusive_gender_trials: use exclusive gender trials ['female' OR 'male'], OR None for all samples.
-    :param heads: optionally define subset of data, provide a list of head IDs or total number of heads IDs
+    :param heads: optionally define the subset of data, provide a list of head IDs or total number of heads IDs
     :return: train_dataloader, validation_dataloader, test_dataloader
     """
     # Load all data
@@ -362,7 +362,7 @@ def prepare_data_for_human_judgment_model(
         **kwargs,
     )
 
-    # Split into train, validation and test set
+    # Split into a train, validation and test set
     if sum(split_ratio) != 1.0:
         msg = "Split ratio must sum up to 1."
         raise ValueError(msg)
@@ -495,7 +495,7 @@ class VGGMultiViewDataset(Dataset):
                 msg = f"Core cut layer must be in {VGG_LAYER_NAMES}."
                 raise ValueError(msg)
             if "-dropout" in layer:
-                # Replace dropout layer with the previous relu layer
+                # Replace the dropout layer with the previous relu layer
                 layer = layer.replace("-dropout", "-relu")
                 cprint(
                     string="Getting the data of the dropout layer is not possible!\n"
@@ -518,7 +518,7 @@ class VGGMultiViewDataset(Dataset):
         """Return the `VGG core` output."""
         raise NotImplementedError
         if self._vgg_core_output is None:
-            # Set path to feature map
+            # Set path to the feature map
             #   take the output of max pool after conv_5_3 layer, since it showed the highest R with
             #   human judgments in the RSA
             ln_out = self.last_core_layer  # former output came from "fc7-relu" layer [before 2023-04-03]
@@ -577,7 +577,7 @@ class VGGMultiViewDataset(Dataset):
         fig.show()
 
     def __len__(self) -> int:
-        """Return the length of dataset."""
+        """Return the length of the dataset."""
         return len(self.multi_view_data)
 
     def __getitem__(self, idx: int | torch.Tensor) -> dict[str, torch.Tensor | int | Any]:
@@ -618,18 +618,18 @@ def prepare_data_for_multi_view_model(
     """
     Prepare data for the multi-view model.
 
-    Split the data into a train, validation and test set.
+    Split the data into a train, validation, and test set.
 
     :param frozen_core: prepare data for frozen VGG core or not
     :param last_core_layer: must be given if frozen_core is True
-    :param split_ratio: ratio of train, validation and test set.
+    :param split_ratio: the ratio of the train, validation, and test set.
                         The test set always contains the frontal views of faces.
                         If > (..., ..., 0.) take also more views into the test set.
     :param batch_size: batch size for dataloader
     :param shuffle: shuffle data
     :param num_workers: number of workers for the dataloader
     :param dtype: data type for images
-    :param heads: optionally define subset of data, provide a list of head IDs or total number of heads IDs
+    :param heads: optionally define the subset of data, provide a list of head IDs or total number of heads IDs
     :return: train_dataloader, validation_dataloader, test_dataloader
     """
     # Load all data
@@ -641,7 +641,7 @@ def prepare_data_for_multi_view_model(
         **kwargs,
     )
 
-    # Split into train, validation and test set
+    # Split into a train, validation and test set
     if not np.allclose(sum(split_ratio), 1):
         msg = "Split ratio must sum up to 1."
         raise ValueError(msg)
@@ -655,7 +655,7 @@ def prepare_data_for_multi_view_model(
         col="b",
     )
 
-    # Splits are done within face ID's. At least all frontal views are in the test set.
+    # Splits are done within face IDs. At least all frontal views are in the test set.
     n_images_per_face = all_data.multi_view_data.head_nr.value_counts().max()  # == 33 (including frontal view)
     training_size_per_face = int(split_ratio[0] * (n_images_per_face - 1))  # -1 for the frontal view
     if split_ratio[2] == 0.0:

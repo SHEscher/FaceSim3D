@@ -40,7 +40,7 @@ def load_spose_weights(
     :param session: '2D', OR '3D'
     :param gender: provide gender ('female', 'male') for model training on exclusive gender trials
     :param pilot: True: use pilot data
-    :param return_path: True: return path to the weights-file
+    :param return_path: True: return the path to the weights-file
     :return: sorted weights
     """
     gender = check_gender_arg(gender=gender)
@@ -71,7 +71,7 @@ def load_spose_weights(
 
     if isinstance(p2_weights, list):
         cprint(string="Choose one weight file ...", col="b")
-        parent_dir = os.path.commonpath(p2_weights)  # find shared parent directory in the list of files
+        parent_dir = os.path.commonpath(p2_weights)  # find the shared parent directory in the list of files
         p2_weights = browse_files(initialdir=parent_dir, filetypes="*.npy")
 
     # Load weights
@@ -190,7 +190,7 @@ def list_vice_model_performances(
     :param session: "2D", OR "3D"
     :param gender: "female" or "male" OR None
     :param modality: "behavioral" OR others. Note, hp-search results can be found with "hp_20perc/behavioral".
-    :param hp_search: True check the hyperparameter search results
+    :param hp_search: checks the hyperparameter search results, if True
     :return: dataframe with the model path, epoch, and validation accuracy sorted by accuracy
     """
     # Check input
@@ -465,7 +465,7 @@ def load_vice_similarity_matrix(
     # Get the best hyperparameters for VICE
     best_hp_vice = get_best_hp_vice(hp_search=True, print_n=int(verbose))[session]  # take the best from the hp search
     if not hp_search:
-        # However, we remove the hyperparameter percentage, since we want the results from the main run
+        # However, we remove the hyperparameter percentage since we want the results from the main run
         best_hp_vice.pop("hp_perc")
 
     # Generate the path to similarity matrix from the hyperparameter settings

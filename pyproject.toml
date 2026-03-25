@@ -215,7 +215,7 @@ lint.select = [
     "PD",  # pandas-vet
     "PL",  # Pylint
     "NPY", # NumPy-specific rules
-] # run `ruff linter` to see all rules; run e.g., `ruff rule ERA001` to see specs of specific rule
+] # run `ruff linter` to see all rules; run e.g., `ruff rule ERA001` to see specs of a specific rule
 
 fix = false # true: Ruff will try to fix certain errors automatically
 
