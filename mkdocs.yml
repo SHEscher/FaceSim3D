@@ -153,14 +153,12 @@ plugins:
     -   mkdocstrings:
             handlers:
                 python:
-                    import:
+                    inventories:
                         - https://docs.python.org/3/objects.inv
                         - https://installer.readthedocs.io/en/stable/objects.inv  # demonstration purpose in the docs
                         - https://mkdocstrings.github.io/autorefs/objects.inv
                     paths: [ code ]
                     options:
-                        docstring_options:
-                            ignore_init_summary: false
                         docstring_section_style: table  # spacy, table, list
                         docstring_style: sphinx
                         filters: [ "!^_" ]
