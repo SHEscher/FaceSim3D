@@ -71,7 +71,7 @@ To reproduce the analysis, the data should be stored in the `data/` folder.
 
 ## Citation
 
-If you use this code or data, please cite the following paper: **Hofmann et al. Dynamic presentation in 3D modulates face similarity judgments. *ROSS*. 2026**:
+If you use this code or data, please cite the following paper: **Hofmann et al. Dynamic presentation in 3D modulates face similarity judgments. *RSOS*. 2026**:
 
 ```bibtex
 @article{hofmannDynamicPresentation3D2026,
