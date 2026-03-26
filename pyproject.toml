@@ -48,6 +48,7 @@ dependencies = [
     "tensorboard==2.12.3",
     "toml==0.10.2",
     "torch==1.12.1",
+    "torchfile==0.1.0",
     "torchvision==0.13.1",
     "torchsummary==1.5.1",
     "torchviz==0.0.2",
