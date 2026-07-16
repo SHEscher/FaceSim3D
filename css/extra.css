@@ -1,0 +1,24 @@
+/* For Icons (see: https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/#with-colors) */
+
+/* Animations */
+@keyframes pump {
+  0%, 40%, 80%, 100% {
+    transform: scale(1);
+  }
+  20%, 60% {
+    transform: scale(1.15);
+  }
+}
+
+/* Set for different icons */
+.gift {
+    animation: pump 3000ms infinite;
+    color: #f3797c;
+}
+
+.code {
+    animation: pump 1500ms infinite;
+    color: #568359;
+}
+
+
