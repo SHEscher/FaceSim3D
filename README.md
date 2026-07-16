@@ -2,7 +2,7 @@
 
 *Testing the effect of dynamic 3D viewing conditions on face similarity perception*
 
-![Last update](https://img.shields.io/badge/last_update-Mar_26,_2026-green)
+![Last update](https://img.shields.io/badge/last_update-July_16,_2026-green)
 ![version](https://img.shields.io/badge/version-v.1.1.0-blue)
 [![demo](https://img.shields.io/badge/pretty-docs-violet)](https://shescher.github.io/FaceSim3D/ "Go to the project's documentation page")
 
@@ -71,26 +71,23 @@ To reproduce the analysis, the data should be stored in the `data/` folder.
 
 ## Citation
 
-If you use this code or data, please cite the following paper: **Hofmann et al. Dynamic presentation in 3D modulates face similarity judgments. *RSOS*. 2026**:
+If you use this code or data, please cite the following paper: [**Hofmann et al. Dynamic presentation in 3D modulates face similarity judgments. *RSOS*. 2026**](https://doi.org/10.1098/rsos.251515):
 
 ```bibtex
 @article{hofmannDynamicPresentation3D2026,
-  title = {Dynamic presentation in {{3D}} modulates face similarity judgments -- {{A}} human-aligned encoding model approach},
-  author = {Hofmann, Simon M. and Ciston, Anthony Buck and Koushik, Abhay and Klotzsche, Felix and Hebart, Martin N. and M\"uller, Klaus-Robert and Villringer, Arno and Scherf, Nico and Hilsmann, Anna and Nikulin, Vadim V. and Gaebler, Michael},
-  journal = {Royal Society Open Science},
-  year = {2026},
-}
-```
-
-See also the corresponding preprint [Hofmann et al. Dynamic presentation in 3D modulates face similarity judgments. *PsyArXiv*. 2024](https://doi.org/10.31234/osf.io/f62pw):
-
-```bibtex
-@article{hofmannDynamicPresentation3D2024,
-  title = {Dynamic presentation in {{3D}} modulates face similarity judgments -- {{A}} human-aligned encoding model approach},
-  author = {Hofmann, Simon M. and Ciston, Anthony Buck and Koushik, Abhay and Klotzsche, Felix and Hebart, Martin N. and M\"uller, Klaus-Robert and Villringer, Arno and Scherf, Nico and Hilsmann, Anna and Nikulin, Vadim V. and Gaebler, Michael},
-  journal = {PsyArXiv},
-  doi = {10.31234/osf.io/f62pw},
-  year = {2024},
+    title = {Dynamic Presentation in {{3D}} Modulates Face Similarity Judgements: A Human-Aligned Encoding Model Approach},
+    shorttitle = {Dynamic Presentation in {{3D}} Modulates Face Similarity Judgements},
+    author = {Hofmann, Simon M. and Ciston, Anthony and Koushik, Abhay and Klotzsche, Felix and Hebart, Martin and Mueller, Klaus-Robert and Villringer, Arno and Scherf, Nico and Hilsmann, Anna and Nikulin, Vadim and Gaebler, Michael},
+    editor = {Viding, Essi and Gray, Katie L.H.},
+    year = 2026,
+    month = jul,
+    journal = {Royal Society Open Science},
+    volume = {13},
+    number = {7},
+    pages = {251515},
+    issn = {2054-5703},
+    doi = {10.1098/rsos.251515},
+    copyright = {http://creativecommons.org/licenses/by/4.0/},
 }
 ```
 
